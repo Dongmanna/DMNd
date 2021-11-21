@@ -244,3 +244,7 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/windows,django,python
+
+#node, venv
+node_modules/
+myvenv/
