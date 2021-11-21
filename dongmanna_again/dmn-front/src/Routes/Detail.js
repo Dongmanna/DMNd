@@ -194,14 +194,6 @@ const Detail = ({ location, history }) => {
 
 	//렌더링
 	const [Part, setPart] = useState(false);
-
-	useEffect(() => {
-		location.postid
-			? getPost(location.postid)
-			: getPost(sessionStorage.postid);
-		getComments(post.id);
-	}, [Part]);
-	//states
 	const [post, setpost] = useState(
 		// location.post1===undefined?JSON.parse(sessionStorage.getItem("post")):location.post1
 		// JSON.parse(sessionStorage.getItem('posta'))
@@ -247,6 +239,14 @@ const Detail = ({ location, history }) => {
 			done: false,
 		}
 	);
+	useEffect(() => {
+		location.postid
+			? getPost(location.postid)
+			: getPost(sessionStorage.postid);
+		getComments(post.id);
+	}, [Part,]);
+	//states
+
 	const [Comments, setComments] = useState([]);
 	const [commentText, setcommentText] = useState('');
 	const handleCommentText = (e) => {
@@ -408,6 +408,8 @@ const Detail = ({ location, history }) => {
 				}
 			);
 			await setpost(response.data);
+			console.log(response.data)
+
 			await sessionStorage.setItem('postid', postid);
 			await sessionStorage.setItem(
 				'posta',
@@ -426,7 +428,6 @@ const Detail = ({ location, history }) => {
 			console.error(error);
 		}
 	}
-	console.log(post.image);
 	return (
 		<DetailStyle>
 			{/* <SearchHeader /> */}
@@ -521,7 +522,7 @@ const Detail = ({ location, history }) => {
 					{post.author.url ===
 					JSON.parse(localStorage.userNow).url ? (
 						<>
-							<Link to={{ pathname: '/Edit', postid: post.id }}>
+							<Link to={{ pathname: '/Edit', post: post }}>
 								<ButtonWhite>수정하기</ButtonWhite>
 							</Link>
 							<ButtonWhite function1={deletePost}>

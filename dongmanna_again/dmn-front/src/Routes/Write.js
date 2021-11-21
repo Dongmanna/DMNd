@@ -11,16 +11,20 @@ import { useHistory, withRouter } from 'react-router';
 const WriteStyle = styled.div`
 
 	font-family: 'NIXGONM-Vb';
-	width: 100%;
 	.body {
-		width: 74vw;
-		margin: 0 13vw;
+		width: 60vw;
+		margin: 0 20vw;
+		@media(max-width:700px){
+			width:90vw;
+			margin:0 5vw;
+		}
 		margin-bottom: 10rem;
-		padding-top: 5vh;
+		padding-top: 7vh;
 	}
 	.top {
 		display: flex;
 		height: 35vh;
+		min-height:25rem;
 		width: 100%;
 		margin-bottom: 2%;
 	}
@@ -40,10 +44,11 @@ const WriteStyle = styled.div`
 		}
 	}
 	.red{
-	border:2px solid red;
+	border:none;
+	border-bottom:2px solid red;
 }
 	.title {
-		width: 100%;
+		width: 95%;
 		height: 3rem;
 		font-size: 2rem;
 		border: none;
@@ -82,6 +87,8 @@ const WriteStyle = styled.div`
 			height: 35vmin;
 			display: inline-block;
 			z-index: 2;
+			object-fit: cover;
+
 		}
 		.default-img {
 			font-size: 1.6rem;
@@ -122,11 +129,12 @@ const WriteStyle = styled.div`
 		opacity: 0;
 	}
 	.red{
-	border:2px solid red;
+	border-bottom:2px solid red;
 }
 	textarea {
-		width: 100%;
+		width: 95%;
 		height: 35vh;
+		min-height:20rem;
 		border: none;
 		box-shadow: 0 0 1px;
 		border-top: solid var(--grn-1) 0.3rem;
@@ -159,7 +167,7 @@ const WriteStyle = styled.div`
 
 	.btn {
 		position: absolute;
-		right: 14vw;
+		right: 21vw;
 	}
 `;
 const Write = () => {
@@ -173,16 +181,12 @@ const Write = () => {
 	const [Deadline, setDeadline] = useState(null);
 	const [Body, setBody] = useState('');
 	const [Image, setImage] = useState('');
+	const [ImagePreview, setImagePreview] = useState("")
 	const [Title, setTitle] = useState('');
 	const [Error, setError] = useState([])
 	const formData = new FormData()
-
-	// const [ItemPl, setItemPl] = useState(initialState)
-	// const [LimitPl, setLimitPl] = useState(initialState)
-	// const [LinkAPl, setLinkAPl] = useState(initialState)
-	// const [PricePl, setPricePl] = useState(initialState)
-	// const [state, setstate] = useState(initialState)
 	let history = useHistory();
+
 	const handleBody = (e) => {
 		e.preventDefault();
 		setBody(e.target.value);
@@ -200,13 +204,22 @@ const Write = () => {
 				: 'Delivery'
 		);
 	};
+// function setThumbnail(e) {
+// 	var reader = new FileReader();
+// 	reader.onload = function (e) {
+// 		setImagePreview(e.target.result)
+// 	};
+// 	reader.readAsDataURL(e.target.files[0]);
+// }
 
 	const handleImage = (e) => {
 		const uploadFile = e.target.files[0];
 		setImage(uploadFile);
-    	// formData.append('image',uploadFile);
-		console.log(e.target.files[0]);
-
+		var reader = new FileReader();
+	reader.onload = function (e) {
+		setImagePreview(e.target.result)
+	};
+	reader.readAsDataURL(e.target.files[0]);
 	};
 
 	axios.defaults.xsrfCookieName = 'csrftoken';
@@ -259,7 +272,6 @@ const Write = () => {
 		}
 	async function submit() {
 		const token = 'Token ' + localStorage.getItem('user_token');
-		const Liimit = Limit * 1;
 		formData.append('category',Category)
     	formData.append('region',Region)
     	formData.append('title',Title)
@@ -267,7 +279,7 @@ const Write = () => {
     	formData.append('limit',Limit)
     	formData.append('link',LinkA)
     	formData.append('price',Price)
-    	formData.append('deadline',Deadline)
+    	if(Deadline)formData.append('deadline',Deadline)
     	formData.append('body',Body)
 		formData.append('image',Image)
 		try {
@@ -275,18 +287,6 @@ const Write = () => {
 				.post(
 					'http://127.0.0.1:8000/api/posts/',
 					formData
-					// {
-					// 	category: Category,
-					// 	region: Region,
-					// 	title: Title,
-					// 	item: Item,
-					// 	limit: Liimit,
-					// 	link: LinkA,
-					// 	price: Price,
-					// 	deadline:Deadline,
-					// 	body: Body,
-					// 	image:formData.image,
-					// }
 					,
 					{
 						headers: {
@@ -338,7 +338,7 @@ const Write = () => {
 			}
 		}
 	}
-	
+	console.log(Price)
 	  	return (
 		<WriteStyle>
 			{/* <SearchHeader /> */}
@@ -407,7 +407,7 @@ const Write = () => {
 									placeholder="마감기한"
 									name="deadline"
 									setState={setDeadline}
-									type={'date'}
+									typeOn={'date'}
 									red={Error.deadline}
 								></Input>
 							</div>
@@ -415,7 +415,7 @@ const Write = () => {
 					</div>
 					<div className="imgbox">
 						{Image ? (
-							<img src={Image} alt="" />
+							<img src={ImagePreview} alt="" />
 						) : (
 							<div className="default-img">
 								사진을 추가하지 않으면 설정하신 품목에 맞는 랜덤
