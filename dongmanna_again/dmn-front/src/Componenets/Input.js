@@ -9,7 +9,7 @@ const InputStyle = styled.input`
         border-bottom:solid 2px var(--grn-1);
         ${(props)=>props.red?`border-bottom:solid 2px red`:""};
         background-color: transparent;
-        font-size: 1.8rem;
+        font-size: 1.6rem;
         ::placeholder{
         }
 
@@ -30,6 +30,22 @@ const InputStyle = styled.input`
         :focus{
             outline-width:0;
             border-bottom:solid 3px var(--grn-1);
+            transition: .4s;
+
+        }
+    `}
+    ${(props)=> props.size==="LL" &&`
+        width:30vw;
+        height:4rem;
+        margin-left:1rem;
+
+        border:solid 2px var(--grn-1);
+        border-radius:5px;
+        overflow:hidden;
+        text-overflow:elipsis;
+        :focus{
+            outline-width:0;
+            border:solid 3px var(--grn-1);
             transition: .4s;
 
         }

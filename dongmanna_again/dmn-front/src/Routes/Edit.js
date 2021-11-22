@@ -8,8 +8,8 @@ import axios from "axios";
 import { useHistory, withRouter } from 'react-router';
 
 const EditStyle = styled.div`
-	
-	font-family: 'NIXGONM-Vb';
+
+font-family: 'NIXGONM-Vb';
 	.body {
 		width: 60vw;
 		margin: 0 20vw;
@@ -22,7 +22,7 @@ const EditStyle = styled.div`
 	}
 	.top {
 		display: flex;
-		height: 35vh;
+		height: 28rem;
 		min-height:25rem;
 		width: 100%;
 		margin-bottom: 2%;
@@ -68,14 +68,20 @@ const EditStyle = styled.div`
 	}
 	.inputs {
 		width: 60%; //여기서 넓이
+		
 	}
 	.con {
 		width: 40%;
 		display: flex;
 		flex-direction: column;
 		justify-content: space-evenly;
+		#blank{
+			opacity:0;
+			height:calc(3rem + 2px);
+		}
 	}
 	.imgbox {
+		padding-top:calc((35vh - 35vmin) / 2);
 		width: 40%;
 		height: 100%;
 		display: flex;
@@ -94,9 +100,6 @@ const EditStyle = styled.div`
 			padding: 0 4rem;
 			padding-top: calc(17vmin - 2rem);
 			text-align: center;
-			/* max-width:calc(35vh - 3rem);
-		height:35vh;
-		max-height:40vw; */
 			width: 35vmin;
 			height: 35vmin;
 
@@ -131,6 +134,7 @@ const EditStyle = styled.div`
 	border-bottom:2px solid red;
 }
 	textarea {
+		margin-top:2rem;
 		width: 95%;
 		height: 35vh;
 		min-height:20rem;
@@ -323,124 +327,121 @@ const Edit = ({location}) => {
 	
     return (
 		<EditStyle>
-			<div className="body" >
-				<CSRFToken />
-				<div className="top">
-					<div className="inputs">
-						<select
-							name="category"
-							className="category"
-							onChange={handleSelect}
-						>
-							<option value="Offline">오프라인</option>
-							<option value="Online">온라인</option>
-							<option value="Delivery">배달</option>
-						</select>
-						<input
-							type="text"
-							name="title"
-							className={Error.title?"title red":"title"}
-							placeholder="제목을 입력해주세요"
-							onChange={handleTitle}
-							value = {Title}
-						/>
-						<div className="container">
-							<div className="left-con con">
-								<Input
-									required
-									placeholder="지역"
-									name="region"
-									setState={setRegion}
-									red={Error.region}
-									value={Region}
-								></Input>
-								<Input
-									required
-									placeholder="품목"
-									name="item"
-									setState={setItem}
-									red={Error.item}
-									value={Item}
-								></Input>
-								<Input
-								value={Limit}
-									required
-									placeholder="정원"
-									name="limit"
-									setState={setLimit}
-									red={Error.limit}
-								></Input>
+	<div className="body">
+					<CSRFToken />
+					<div className="top">
+						<div className="inputs">
+							<select
+								name="category"
+								className="category"
+								onChange={handleSelect}
+							>
+								<option value="Offline">오프라인</option>
+								<option value="Online">온라인</option>
+								<option value="Delivery">배달</option>
+							</select>
+							<input
+								type="text"
+								name="title"
+								className={Error.title ? 'title red' : 'title'}
+								placeholder="제목을 입력해주세요"
+								onChange={handleTitle}
+							/>
+							<div className="container">
+								<div className="left-con con">
+									<Input
+										required
+										placeholder="지역"
+										name="region"
+										setState={setRegion}
+										red={Error.region}
+									></Input>
+									<Input
+										required
+										placeholder="품목"
+										name="item"
+										setState={setItem}
+										red={Error.item}
+									></Input>
+									<Input
+										required
+										placeholder="정원"
+										name="limit"
+										setState={setLimit}
+										red={Error.limit}
+									></Input>
+								</div>
+								<div className="right-con con">
+									<Input
+										size="L"
+										placeholder="가격"
+										name="price"
+										setState={setPrice}
+										red={Error.price}
+									></Input>
+									<Input
+										size="L"
+										placeholder="마감기한"
+										name="deadline"
+										setState={setDeadline}
+										typeOn={'date'}
+										red={Error.deadline}
+									></Input>
+									<div id="blank"></div>
+								</div>
 							</div>
-							<div className="right-con con">
-								<Input
-								value={LinkA}
-									size="L"
-									placeholder="링크"
+							<Input
+									size="LL"
+									placeholder="오픈카톡방 링크"
 									name="link"
 									type={'url'}
 									setState={setLinkA}
 									red={Error.link}
+									required
 								></Input>
-								<Input
-									size="L"
-									value={Price}
-									placeholder="가격"
-									name="price"
-									setState={setPrice}
-									red={Error.price}
-								></Input>
-								<Input
-									size="L"
-									value={Deadline}
-									placeholder="마감기한"
-									name="deadline"
-									setState={setDeadline}
-									typeOn={'date'}
-									red={Error.deadline}
-								></Input>
-							</div>
+						</div>
+
+						<div className="imgbox">
+							{Image ? (
+								<img src={ImagePreview} alt="" />
+							) : (
+								<div className="default-img">
+									사진을 추가하지 않으면 설정하신 품목에 맞는
+									랜덤 이미지가 배정됩니다.
+								</div>
+							)}
+
+							<label htmlFor="input-file" className="imgbtn">
+								사진추가
+							</label>
+							<input
+								type={'file'}
+								accept="image/*"
+								id="input-file"
+								onChange={handleImage}
+								className="imgsub"
+							/>
 						</div>
 					</div>
-					<div className="imgbox">
-						{Image || ImagePreview ? (
-							<img src={ImagePreview} alt="" />
-						) : (
-							<div className="default-img">
-								사진을 추가하지 않으면 설정하신 품목에 맞는 랜덤
-								이미지가 배정됩니다.
-							</div>
-						)}
-
-						<label htmlFor="input-file" className="imgbtn">
-							사진추가
-						</label>
-						<input
-							type={"file"}
-							accept="image/*"
-							id="input-file"
-							onChange={handleImage}
-							className="imgsub"
-						/>
+					
+					<textarea
+						name="body"
+						id=""
+						cols="30"
+						onChange={handleBody}
+						rows="10"
+						placeholder={
+							Error.body
+								? '본문을 작성해주세요'
+								: '만날 장소와 시간, 구매 방법과 배분방법 등을 간단히 적어주세요.'
+						}
+						className={Error.body ? ' red' : ''}
+					/>
+					<br />
+					<div className="btn">
+						<ButtonGreen function1={submit}>작성하기</ButtonGreen>
 					</div>
 				</div>
-				<textarea
-				value={Body}
-					name="body"
-					id=""
-					cols="30"
-					onChange={handleBody}
-					rows="10"
-					placeholder={Error.body?"본문을 작성해주세요":"만날 장소와 시간, 구매 방법과 배분방법 등을 간단히 적어주세요."}
-					className={Error.body?" red":""}
-
-				/>
-				<br />
-				<div className="btn">
-					<ButtonGreen  function1={submit}>
-						작성하기
-					</ButtonGreen>
-				</div>
-			</div>
 		</EditStyle>
 	);
 

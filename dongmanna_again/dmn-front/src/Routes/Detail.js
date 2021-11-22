@@ -13,9 +13,13 @@ import { Link } from 'react-router-dom';
 
 const DetailStyle = styled.div`
 	font-family: 'NIXGONM-Vb';
+	img{
+		object-fit: cover;
+
+	}
 	.body {
-		padding: 0 13%;
-		margin-top: 3vh;
+		padding: 0 18%;
+		margin-top: 4rem;
 	}
 	.top {
 		height: 30vw;
@@ -83,8 +87,8 @@ const DetailStyle = styled.div`
 		.datasection {
 			height: 58%;
 			.type {
-				width: 20rem;
-				display: inline-block;
+				width:7rem;
+        		display: inline-block;
 			}
 			.must {
 				font-size: 1.8rem;
@@ -100,6 +104,13 @@ const DetailStyle = styled.div`
 				padding-left: 3%;
 				overflow: hidden;
 				text-overflow: ellipsis;
+				.link{
+					display:inline-block;
+					width:20rem;
+					height:3rem;
+					overflow: hidden;
+				text-overflow: ellipsis;
+				}
 			}
 		}
 		.btntop {
@@ -130,6 +141,7 @@ const DetailStyle = styled.div`
 		border: solid 0.3rem #f2f2f2;
 	}
 	.btnsection {
+		padding-top:1rem;
 		display: flex;
 		justify-content: flex-end;
 	}
@@ -260,7 +272,7 @@ const Detail = ({ location, history }) => {
 		return (
 			<MemberProfile
 				key={member.url}
-				img=""
+				img={post.author.profile_image}
 				nickname={member.nickname}
 				author={isAuthor}
 			></MemberProfile>
@@ -269,7 +281,7 @@ const Detail = ({ location, history }) => {
 	//댓글 목록
 	const commentBoxes = Comments.map((comment) => {
 		return (
-			<CommentBox nickname={comment.author.nickname} key={comment.id}>
+			<CommentBox nickname={comment.author.nickname} key={comment.id}image = {comment.author.profile_image}>
 				{comment.content}
 			</CommentBox>
 		);
@@ -444,9 +456,9 @@ const Detail = ({ location, history }) => {
 								<div className="date">{post.pub_date}</div>
 							</div>
 							<div className="author">
-								{post.author.image ? (
+								{post.author.profile_image ? (
 									<img
-										src={''}
+										src={post.author.profile_image}
 										alt="작성자"
 										className="author-profile-img"
 									/>
@@ -474,9 +486,9 @@ const Detail = ({ location, history }) => {
 								<br />
 								<div className="type">마감기한</div>{' '}
 								{post.deadline ? post.deadline : '미정'} <br />
-								<div className="type">링크</div>{' '}
-								{post.link ? post.link : '미정'}
-								<br />
+								{/* <div className="type">링크</div>{' '}
+								<div className="link">{post.link ? post.link : '미정'}</div> 
+								<br /> */}
 							</div>
 						</div>
 						<div className="btntop">
@@ -486,8 +498,9 @@ const Detail = ({ location, history }) => {
 									join={join}
 									part={Part}
 									id={post.id}
-									function2={'채팅방 입장'}
-									secondText="채팅방 입장!"
+									
+									secondText="카톡방 입장"
+									link = {post.link}
 								>
 									참가하기!
 								</ButtonGreenA>

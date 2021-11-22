@@ -11,6 +11,8 @@ const MemberProfileStyle=styled.div`
         height: 5rem;
         border-radius: 40px;
         background-color:#f2f2f2;
+        object-fit: cover;
+
     }
     .name{
         margin-top:.8rem;
@@ -39,7 +41,7 @@ const MemberProfileStyle=styled.div`
 export default function MemberProfile({author,nickname,img}) {
     return (
         <MemberProfileStyle>
-            <img src={avatar} alt="프로필" />
+            <img src={img?img:avatar} alt="프로필" />
             <div className="name">
                 {nickname} 
                 {author===true ?<div className="author-tag">작성자</div>:<div></div>}
