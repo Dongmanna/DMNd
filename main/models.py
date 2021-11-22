@@ -28,6 +28,7 @@ class Post(models.Model):
     item = models.CharField(max_length=50)
     limit = models.PositiveIntegerField(
         default=1, validators=[MinValueValidator(1), MaxValueValidator(10)])
+    chatroom = models.URLField(max_length=300)
 
     # 비필수 필드: 링크, 가격, 마감기한, 사진
     link = models.URLField(max_length=300, blank=True, null=True)
