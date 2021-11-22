@@ -1,15 +1,16 @@
 # users/serializers.py
 from django.core.validators import MaxLengthValidator
+from rest_auth.registration.serializers import RegisterSerializer
+from rest_auth.serializers import LoginSerializer, UserDetailsSerializer
 from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
-from rest_auth.serializers import LoginSerializer, UserDetailsSerializer
-from rest_auth.registration.serializers import RegisterSerializer
+
 from .models import CustomUser
 from .validators import NicknameValidator
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
-    
+
     class Meta:
         model = CustomUser
         fields = ['url', 'id', 'email', 'nickname', 'address', 'profile_image']
@@ -22,8 +23,8 @@ class CustomRegisterSerializer(RegisterSerializer):
     # nickname 유일성, 문자, 길이 검사
     nickname = serializers.CharField(
         validators=[UniqueValidator(queryset=CustomUser.objects.all()),
-        NicknameValidator(),
-        MaxLengthValidator(20)]
+                    NicknameValidator(),
+                    MaxLengthValidator(20)]
     )
     address = serializers.CharField()
     profile_image = serializers.ImageField(required=False)
@@ -50,4 +51,4 @@ class CustomUserDetailsSerializer(UserDetailsSerializer):
     class Meta:
         model = CustomUser
         fields = ['url', 'id', 'email', 'nickname', 'address', 'profile_image']
-        read_only_fields = ['email', 'nickname',]
+        read_only_fields = ['email', 'nickname', ]

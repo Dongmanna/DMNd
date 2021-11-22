@@ -1,5 +1,6 @@
 # user/views.py
-from rest_framework import viewsets, permissions
+from rest_framework import permissions, viewsets
+
 from .models import CustomUser
 from .serializers import UserSerializer
 
@@ -9,5 +10,3 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = UserSerializer
     # 편의를 위해 우선 주석처리 해둠
     # permission_classes = [permissions.IsAdminUser, ]
-
-    
