@@ -24,7 +24,7 @@ class PostSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Post
         fields = ['url', 'id', 'author', 'pub_date', 'region', 'category', 'title',
-                  'body', 'item', 'limit', 'link', 'price', 'deadline', 'image', 'members', 'done']
+                  'body', 'item', 'limit', 'chatroom', 'link', 'price', 'deadline', 'image', 'members', 'done']
         read_only_fields = ['author', 'pub_date', 'done', 'members']
 
 
