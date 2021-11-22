@@ -22,10 +22,10 @@ const CommentBoxStyle=styled.div`
     }
 `
 
-export default function CommentBox( {nickname, img, children}) {
+export default function CommentBox( {nickname, image, children}) {
     return (
         <CommentBoxStyle>
-            <img src={avatar} alt="" />
+            <img src={image?image:avatar} alt="" />
             <div className="text">
                 <div>{nickname}</div> 
                 {children}

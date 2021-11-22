@@ -44,6 +44,7 @@ const CardStyle=styled.div`
         }
     }
     .title{
+        width: 100%;
         font-family: 'NIXGONM-Vb';
         position:absolute;
         top:19rem;
@@ -53,12 +54,12 @@ const CardStyle=styled.div`
         line-break: break-all;
         overflow:hidden;
         text-overflow:ellipsis;
-        /* display: block;
-        max-height:4rem; */
-        display: -webkit-box;
-        -webkit-line-clamp: 2; /* number of lines to show */
+        display: block;
+        max-height:4rem;
+        /* display: -webkit-box;
+        -webkit-line-clamp: 2; 
         -webkit-box-orient: vertical;
-        margin-left:0.5rem;
+        margin-left:0.5rem; */
     }
     .container{
         font-family: 'NIXGONM-Vb';

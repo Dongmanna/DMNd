@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Input from '../Componenets/Input';
 import ButtonGreen from '../Componenets/ButtonGreen';
@@ -105,8 +105,9 @@ export default function SignUp({setIsLogged}) {
 	const [Password1, setPassword1] = useState("")
 	const [Password2, setPassword2] = useState("")
 	const [Nickname, setNickname] = useState("")
-	const [Address, setAddress] = useState("")
+	// const [Address, setAddress] = useState("")
 	const [Error, setError] = useState([])
+	const [geoInfo, setgeoInfo] = useState("")
 
 	async function getUserNow() {
 		try {
@@ -167,7 +168,7 @@ export default function SignUp({setIsLogged}) {
 				password1:Password1,
 				password2:Password2,
 				nickname:Nickname,
-				address:Address,
+				address:geoInfo,
 				// profile_image:null,
 			}
 			);            
@@ -194,6 +195,66 @@ export default function SignUp({setIsLogged}) {
 			}
         }
     };
+	const kakao = window.kakao
+	// const jsKey = "aa41ca117f2c98dd171a5c629a466b23";
+
+    // // SDK는 한 번만 초기화해야 한다.
+    // // 중복되는 초기화를 막기 위해 isInitialized()로 SDK 초기화 여부를 판단한다.
+    // if (!window.Kakao.isInitialized()) {
+    //   // JavaScript key를 인자로 주고 SDK 초기화
+    //   window.Kakao.init(jsKey);
+    //   // SDK 초기화 여부를 확인하자.
+    //   console.log(window.Kakao.isInitialized());
+    // }
+	
+	function getLocation() {
+        if (navigator.geolocation) {
+            // GPS를 지원하면
+            navigator.geolocation.getCurrentPosition(
+                function (position) {
+                    const latitude = position.coords.latitude;
+                    const longitude = position.coords.longitude;
+                    const coords = position.coords;
+                    console.log(latitude);
+                    var geocoder = new kakao.maps.services.Geocoder();
+                    function searchAddrFromCoords(coords, callback) {
+                        // 좌표로 행정동 주소 정보를 요청합니다
+                        geocoder.coord2RegionCode(coords.longitude, coords.latitude, callback);
+                    }
+                    searchAddrFromCoords(coords, displayCenterInfo);
+    
+                    function displayCenterInfo(result, status) {
+                        if (status === kakao.maps.services.Status.OK) {
+                            for (var i = 0; i < result.length; i++) {
+                                // 행정동의 region_type 값은 'H' 이므로
+                                if (result[i].region_type === "H") {
+                                    const address2 = result[0].region_3depth_name;
+									const address1 = result[0].region_2depth_name;
+
+                                    setgeoInfo(address1 +" " +  address2);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                },
+                function (error) {
+                    console.error(error);
+                },
+                {
+                    enableHighAccuracy: false,
+                    maximumAge: 0,
+                    timeout: Infinity,
+                }
+            );
+        } else {
+            alert("GPS를 지원하지 않습니다");
+        }
+    }
+	useEffect(() => {
+		getLocation()
+		console.log(kakao,"aaa")
+	}, [])
 	return (
 		<SignUpStyle>
 			<div className="box">
@@ -242,9 +303,9 @@ export default function SignUp({setIsLogged}) {
 					<div className="input-box address">
 						<label htmlFor="">주소</label>
 						<h2>
-							현재 위치하신 주소를 입력해주세요 ex) 마포구 대흥동
+							현재 위치하신 주소가 자동으로 입력됩니다. 위치 권한을 허용해주세요.
 						</h2>
-						<Input type="text" placeholder="주소" name = "address" setState ={setAddress}/>
+						<Input type="text" placeholder="주소" name = "address" value = {geoInfo }/>
 						{Error.address?<div className="red">주소를 입력해주세요</div>:""}
 					</div>
 						<ButtonGreen function1 = {submit}>가입하기</ButtonGreen>

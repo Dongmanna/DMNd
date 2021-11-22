@@ -7,7 +7,7 @@ const ButtonGreenAStyle = styled.button`
     p{
         z-index:3;
         color:white;
-        font-size:2rem;
+        font-size:1.8rem;
         transition:1s;
     }
     &:before {
@@ -58,17 +58,25 @@ const ButtonGreenAStyle = styled.button`
 
 `
 
-export default function ButtonGreenA({children, function1, function2, secondText, part, join,id}) {
+export default function ButtonGreenA({children, function1, secondText, part, join,id, link}) {
 
     function joinfunc(){
         join(id);
         function1(true);
     }
     return (
-        // <ButtonGreenAStyle phase={phase}      onClick={phase===1?()=>{setPhase(0);function1()}:()=>{function2} > 실제 사용시
-        <ButtonGreenAStyle phase={part?0:1}      onClick={!part?joinfunc:""} > {/* 콜백으로 넘기기 */}
-            <p>{!part?children:secondText}</p>
+        <>
+        {part?
+            <a href = {link} target="_blank" rel="noopener noreferrer"><ButtonGreenAStyle phase={part?0:1}      onClick={!part?joinfunc:"location.href=link"} > {/* 콜백으로 넘기기 */}
+        <p>{secondText}</p>
 
-        </ButtonGreenAStyle>
+    </ButtonGreenAStyle></a>
+    :
+    <ButtonGreenAStyle phase={part?0:1}      onClick={!part?joinfunc:"location.href=link"} > {/* 콜백으로 넘기기 */}
+        <p>{children}</p>
+
+    </ButtonGreenAStyle>
+}</>
+        
     )
 }
