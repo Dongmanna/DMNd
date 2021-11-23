@@ -1,16 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
-import ButtonWhite from '../Componenets/ButtonWhite';
+
 import ButtonGray from '../Componenets/ButtonGray';
 import ButtonGreenA from '../Componenets/ButtonGreenA';
-import MemberProfile from '../Componenets/MemberProfile';
+import ButtonWhite from '../Componenets/ButtonWhite';
 import CommentBox from '../Componenets/CommentBox';
-// import temp_image1 from "../img/temp_image1.png"
-import avatar from '../img/avatar-pl.png';
-import { withRouter } from 'react-router';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
+import MemberProfile from '../Componenets/MemberProfile';
+import avatar from '../img/avatar-pl.png';
+import axios from 'axios';
+import styled from 'styled-components';
 import url from "../Url"
+import { withRouter } from 'react-router';
+
+// import temp_image1 from "../img/temp_image1.png"
+
+
+
+
+
 
 const DetailStyle = styled.div`
 	font-family: 'NIXGONM-Vb';
@@ -232,22 +239,7 @@ const Detail = ({ location, history }) => {
 			link: '',
 			deadline: '2021-11-27T19:20:00+09:00',
 			members: [
-				{
-					url: url + 'api/users/1/',
-					id: 1,
-					email: 'misby0327@gmail.com',
-					nickname: '이',
-					address: '마포구 공덕동',
-					profile_image: null,
-				},
-				{
-					url: url + 'api/users/2/',
-					id: 2,
-					email: 'robot0327@naver.com',
-					nickname: '리',
-					address: '마포구 염리동',
-					profile_image: null,
-				},
+				
 			],
 			image: null,
 			done: false,
@@ -295,7 +287,7 @@ const Detail = ({ location, history }) => {
 		try {
 			// const token = 'Token ' + localStorage.getItem('user_token');
 			const response = await axios.post(
-				`http://127.0.0.1:8000/api/posts/` + id + `/join/`,
+				url + id + `/join/`,
 				{
 					_content: '',
 					_content_type: 'application/json',
@@ -332,7 +324,7 @@ const Detail = ({ location, history }) => {
 		try {
 			// const token = 'Token ' + localStorage.getItem('user_token');
 			const response = await axios.get(
-				`http://127.0.0.1:8000/api/posts/` + id + `/comments/`,
+				url + id + `/comments/`,
 				{
 					headers: {
 						Accept: 'application/json',
@@ -352,7 +344,7 @@ const Detail = ({ location, history }) => {
 		try {
 			// const token = 'Token ' + localStorage.getItem('user_token');
 			const response = await axios.post(
-				`http://127.0.0.1:8000/api/posts/` + id + `/doneregister/`,
+				url + id + `/doneregister/`,
 				{},
 				{
 					headers: {
@@ -372,7 +364,7 @@ const Detail = ({ location, history }) => {
 			try {
 				// const token = 'Token ' + localStorage.getItem('user_token');
 				const response = await axios.post(
-					`http://127.0.0.1:8000/api/posts/` + id + `/done/`,
+					url + id + `/done/`,
 					{},
 					{
 						headers: {
@@ -412,7 +404,7 @@ const Detail = ({ location, history }) => {
 		try {
 			// const token = 'Token ' + localStorage.getItem('user_token');
 			const response = await axios.get(
-				`http://127.0.0.1:8000/api/posts/` + postid,
+				url + postid,
 				{
 					headers: {
 						Accept: 'application/json',
