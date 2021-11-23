@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import MainCategory from "../Componenets/MainCategory";
 import "../css/Home.css"
-// import{ Content} from "../data";
 import SearchBar from '../Componenets/SearchBar';
 import styled from "styled-components";
 import axios from 'axios';
@@ -85,8 +84,7 @@ const Home = () => {
 
     return (
         <HomeStyle>
-            {/* <Header /> */}
-            {/* {UserNow} */}
+            
             <div>
                 <div className="search-box">
                     <Ani/>

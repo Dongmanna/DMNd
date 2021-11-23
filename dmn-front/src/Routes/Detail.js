@@ -537,7 +537,7 @@ const Detail = ({ location, history }) => {
 					{post.author.url ===
 					JSON.parse(localStorage.userNow).url ? (
 						<>
-							<Link to={{ pathname: '/Edit', post: post }}>
+							<Link to={{ pathname: '/edit', post: post }}>
 								<ButtonWhite>수정하기</ButtonWhite>
 							</Link>
 							<ButtonWhite function1={deletePost}>

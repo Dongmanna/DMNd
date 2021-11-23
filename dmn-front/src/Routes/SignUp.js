@@ -75,9 +75,7 @@ const SignUpStyle = styled.div`
 			background-color: white;
 		}
 	}
-	.email input {
-		width: 50%;
-	}
+	
 	select {
 		background-color: transparent;
 		height: 4rem;
@@ -267,14 +265,13 @@ export default function SignUp({setIsLogged}) {
 						<h2>이메일을 입력해주세요.</h2>
 						<Input
 							type="email"
-							id="email-input"
 							placeholder="이메일"
 							name = "email"
 							setState ={setEmail}
 						/>
-						<h3>@</h3>
-						{Error.email?<div className="red">이메일을 입력해주세요</div>:""}
-
+						{/* <h3>@</h3> */}
+						{Error.email?<div className="red">이메일주소 입력해주세요</div>:""}
+						{Error.email===""}
 						{/* <select name="" id="">
 							<option value="naver.com">naver.com</option>
 							<option value="gmail.com">gmail.com</option>
@@ -288,7 +285,7 @@ export default function SignUp({setIsLogged}) {
 						<Input type="password" placeholder="비밀번호 입력" name="password1" setState ={setPassword1} />
 						{Error.password1?<div className="red">비밀번호를 입력해주세요</div>:<div className="gap"></div>}
 						<Input type="password" placeholder="비밀번호 확인" name="password2" setState ={setPassword2}/>
-						{Error.password2?<div className="red">올바른 비밀번호를 입력해주세요</div>:<div className="gap"></div>}
+						{Error.password2?<div className="red">비밀번호가 다릅니다</div>:<div className="gap"></div>}
 					</div>
 
 					<div className="input-box nickname">

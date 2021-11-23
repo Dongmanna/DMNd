@@ -1,22 +1,21 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import SearchHeader from "../Componenets/SearchHeader";
-import styled from "styled-components";
-import ButtonGreen from "../Componenets/ButtonGreen";
-import Input from "../Componenets/Input"
-import axios from "axios";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import SearchHeader from '../Componenets/SearchHeader';
+import styled from 'styled-components';
+import ButtonGreen from '../Componenets/ButtonGreen';
+import Input from '../Componenets/Input';
+import axios from 'axios';
 import { useHistory, withRouter } from 'react-router';
-import url from "../Url"
+import url from '../Url';
 
 const EditStyle = styled.div`
-
-font-family: 'NIXGONM-Vb';
+	font-family: 'NIXGONM-Vb';
 	.body {
 		width: 60vw;
 		margin: 0 20vw;
-		@media(max-width:700px){
-			width:90vw;
-			margin:0 5vw;
+		@media (max-width: 700px) {
+			width: 90vw;
+			margin: 0 5vw;
 		}
 		margin-bottom: 10rem;
 		padding-top: 7vh;
@@ -24,7 +23,7 @@ font-family: 'NIXGONM-Vb';
 	.top {
 		display: flex;
 		height: 28rem;
-		min-height:25rem;
+		min-height: 25rem;
 		width: 100%;
 		margin-bottom: 2%;
 	}
@@ -43,10 +42,10 @@ font-family: 'NIXGONM-Vb';
 			outline-width: 0;
 		}
 	}
-	.red{
-	border:none;
-	border-bottom:2px solid red;
-}
+	.red {
+		border: none;
+		border-bottom: 2px solid red;
+	}
 	.title {
 		width: 95%;
 		height: 3rem;
@@ -69,20 +68,19 @@ font-family: 'NIXGONM-Vb';
 	}
 	.inputs {
 		width: 60%; //여기서 넓이
-		
 	}
 	.con {
 		width: 40%;
 		display: flex;
 		flex-direction: column;
 		justify-content: space-evenly;
-		#blank{
-			opacity:0;
-			height:calc(3rem + 2px);
+		#blank {
+			opacity: 0;
+			height: calc(3rem + 2px);
 		}
 	}
 	.imgbox {
-		padding-top:calc((35vh - 35vmin) / 2);
+		padding-top: calc((35vh - 35vmin) / 2);
 		width: 40%;
 		height: 100%;
 		display: flex;
@@ -94,7 +92,6 @@ font-family: 'NIXGONM-Vb';
 			display: inline-block;
 			z-index: 2;
 			object-fit: cover;
-
 		}
 		.default-img {
 			font-size: 1.6rem;
@@ -131,14 +128,14 @@ font-family: 'NIXGONM-Vb';
 		position: absolute;
 		opacity: 0;
 	}
-	.red{
-	border-bottom:2px solid red;
-}
+	.red {
+		border-bottom: 2px solid red;
+	}
 	textarea {
-		margin-top:2rem;
+		margin-top: 2rem;
 		width: 95%;
 		height: 35vh;
-		min-height:20rem;
+		min-height: 20rem;
 		border: none;
 		box-shadow: 0 0 1px;
 		border-top: solid var(--grn-1) 0.3rem;
@@ -175,25 +172,25 @@ font-family: 'NIXGONM-Vb';
 	}
 `;
 
-const Edit = ({location}) => {
+const Edit = ({ location }) => {
 	const post = location.post;
-	const userNow = localStorage.getItem('userNow')
+	const userNow = localStorage.getItem('userNow');
 	const token = 'Token ' + localStorage.getItem('user_token');
 	const [Category, setCategory] = useState(post.category);
 	const [Region, setRegion] = useState(userNow.region);
 	const [Item, setItem] = useState(post.item);
 	const [Limit, setLimit] = useState(post.limit);
 	const [LinkA, setLinkA] = useState(post.link);
-	const [ChatRoom, setChatRoom] = useState("")
+	const [ChatRoom, setChatRoom] = useState('');
 
 	const [Price, setPrice] = useState(post.price);
 	const [Deadline, setDeadline] = useState(null);
 	const [Body, setBody] = useState(post.body);
-	const [Image, setImage] = useState("");
-	const [ImagePreview, setImagePreview] = useState(post.image)
+	const [Image, setImage] = useState('');
+	const [ImagePreview, setImagePreview] = useState(post.image);
 	const [Title, setTitle] = useState(post.title);
-	const [Error, setError] = useState([])
-	const formData = new FormData()
+	const [Error, setError] = useState([]);
+	const formData = new FormData();
 	let history = useHistory();
 
 	const handleBody = (e) => {
@@ -213,22 +210,22 @@ const Edit = ({location}) => {
 				: 'Delivery'
 		);
 	};
-// function setThumbnail(e) {
-// 	var reader = new FileReader();
-// 	reader.onload = function (e) {
-// 		setImagePreview(e.target.result)
-// 	};
-// 	reader.readAsDataURL(e.target.files[0]);
-// }
+	// function setThumbnail(e) {
+	// 	var reader = new FileReader();
+	// 	reader.onload = function (e) {
+	// 		setImagePreview(e.target.result)
+	// 	};
+	// 	reader.readAsDataURL(e.target.files[0]);
+	// }
 
 	const handleImage = (e) => {
 		const uploadFile = e.target.files[0];
 		setImage(uploadFile);
 		var reader = new FileReader();
-	reader.onload = function (e) {
-		setImagePreview(e.target.result)
-	};
-	reader.readAsDataURL(e.target.files[0]);
+		reader.onload = function (e) {
+			setImagePreview(e.target.result);
+		};
+		reader.readAsDataURL(e.target.files[0]);
 	};
 
 	axios.defaults.xsrfCookieName = 'csrftoken';
@@ -259,65 +256,59 @@ const Edit = ({location}) => {
 			<input type="hidden" name="csrfmiddlewaretoken" value={csrftoken} />
 		);
 	};
-		// //모델 생성
-		// async function doneRegister(id) {
-		// 	try {
-		// 		// const token = 'Token ' + localStorage.getItem('user_token');
-		// 		const response = await axios.put(
-		// 			url + `api/posts/` + id + `/doneregister/`,
-		// 			{},
-		// 			{
-		// 				headers: {
-		// 					Accept: 'application/json',
-		// 					'Content-Type': 'application/json',
-		// 					Authorization: token,
-		// 				},
-		// 			}
-		// 		);
-		// 		console.log('done');
-		// 	} catch (error) {
-		// 		console.error(error);
-		// 	}
-		// }
+	// //모델 생성
+	// async function doneRegister(id) {
+	// 	try {
+	// 		// const token = 'Token ' + localStorage.getItem('user_token');
+	// 		const response = await axios.put(
+	// 			url + `api/posts/` + id + `/doneregister/`,
+	// 			{},
+	// 			{
+	// 				headers: {
+	// 					Accept: 'application/json',
+	// 					'Content-Type': 'application/json',
+	// 					Authorization: token,
+	// 				},
+	// 			}
+	// 		);
+	// 		console.log('done');
+	// 	} catch (error) {
+	// 		console.error(error);
+	// 	}
+	// }
 	async function submit() {
 		const token = 'Token ' + localStorage.getItem('user_token');
-		formData.append('category',Category)
-    	formData.append('region',Region)
-    	formData.append('title',Title)
-    	formData.append('item',Item)
-    	formData.append('limit',Limit)
-    	formData.append('link',LinkA)
-    	formData.append('price',Price)
-    	if(Deadline)formData.append('deadline',Deadline)
-    	formData.append('body',Body)
-		if(Image)formData.append('image',Image)
-		formData.append('chatroom',ChatRoom)
+		formData.append('category', Category);
+		formData.append('region', Region);
+		formData.append('title', Title);
+		formData.append('item', Item);
+		formData.append('limit', Limit);
+		formData.append('link', LinkA);
+		formData.append('price', Price);
+		if (Deadline) formData.append('deadline', Deadline);
+		formData.append('body', Body);
+		if (Image) formData.append('image', Image);
+		formData.append('chatroom', ChatRoom);
 
 		try {
-			await axios
-				.put(
-					url + 'api/posts/'+post.id+"/",
-					formData
-					,
-					{
-						headers: {
-							Accept: 'application/json',
-							'Content-Type':'multipart/form-data',
-							'X-CSRFToken': csrftoken,
-							Authorization: token,
-						},
-					}
-				)
-				
-			history.push("/")
+			await axios.put(url + 'api/posts/' + post.id + '/', formData, {
+				headers: {
+					Accept: 'application/json',
+					'Content-Type': 'multipart/form-data',
+					'X-CSRFToken': csrftoken,
+					Authorization: token,
+				},
+			});
+
+			history.push('/');
 		} catch (error) {
 			if (error.response) {
 				/*
 				 * The request was made and the server responded with a
 				 * status code that falls out of the range of 2xx
 				 */
-				
-				setError(error.response.data)
+
+				setError(error.response.data);
 			} else if (error.request) {
 				/*
 				 * The request was made but no response was received, `error.request`
@@ -331,135 +322,134 @@ const Edit = ({location}) => {
 			}
 		}
 	}
-	console.log(userNow.region)
-    return (
+	console.log(userNow.region);
+	return (
 		<EditStyle>
-	<div className="body">
-					<CSRFToken />
-					<div className="top">
-						<div className="inputs">
-							<select
-								name="category"
-								className="category"
-								onChange={handleSelect}
-							>
-								<option value="Offline">오프라인</option>
-								<option value="Online">온라인</option>
-								<option value="Delivery">배달</option>
-							</select>
-							<input
-								type="text"
-								name="title"
-								className={Error.title ? 'title red' : 'title'}
-								placeholder="제목을 입력해주세요"
-								onChange={handleTitle}
-							/>
-							<div className="container">
-								<div className="left-con con">
-									<Input
-										required
-										placeholder="지역"
-										name="region"
-										red={Error.region}
-										value = {userNow.region}
-									></Input>
-									<Input
-										required
-										placeholder="품목"
-										name="item"
-										setState={setItem}
-										red={Error.item}
-									></Input>
-									<Input
-										required
-										placeholder="정원"
-										name="limit"
-										setState={setLimit}
-										red={Error.limit}
-									></Input>
-								</div>
-								<div className="right-con con">
-									<Input
-										size="L"
-										placeholder="가격"
-										name="price"
-										setState={setPrice}
-										red={Error.price}
-									></Input>
-									<Input
-										size="L"
-										placeholder="마감기한"
-										name="deadline"
-										setState={setDeadline}
-										typeOn={'date'}
-										red={Error.deadline}
-									></Input>
-<Input
-									size="LL"
-									placeholder="오픈카톡방 링크"
-									name="chatroom"
-									type={'url'}
-									setState={setChatRoom}
-									red={Error.chatroom}
+			<div className="body">
+				<CSRFToken />
+				<div className="top">
+					<div className="inputs">
+						<select
+							name="category"
+							className="category"
+							onChange={handleSelect}
+						>
+							<option value="Offline">오프라인</option>
+							<option value="Online">온라인</option>
+							<option value="Delivery">배달</option>
+						</select>
+						<input
+							type="text"
+							name="title"
+							className={Error.title ? 'title red' : 'title'}
+							placeholder="제목을 입력해주세요"
+							onChange={handleTitle}
+						/>
+						<div className="container">
+							<div className="left-con con">
+								<Input
 									required
-								></Input>								</div>
-							</div>
-							<Input
-									size="LL"
-									placeholder="오픈카톡방 링크"
-									name="chatroom"
-									type={'url'}
-									setState={setChatRoom}
-									red={Error.chatroom}
-									required
+									placeholder="지역"
+									name="region"
+									red={Error.region}
+									value={userNow.region}
 								></Input>
+								<Input
+									required
+									placeholder="품목"
+									name="item"
+									setState={setItem}
+									red={Error.item}
+								></Input>
+								<Input
+									required
+									placeholder="정원"
+									name="limit"
+									setState={setLimit}
+									red={Error.limit}
+								></Input>
+							</div>
+							<div className="right-con con">
+								<Input
+									size="L"
+									placeholder="가격"
+									name="price"
+									setState={setPrice}
+									red={Error.price}
+								></Input>
+								<Input
+									size="L"
+									placeholder="마감기한"
+									name="deadline"
+									setState={setDeadline}
+									typeOn={'date'}
+									red={Error.deadline}
+								></Input>
+								<Input
+									size="LL"
+									placeholder="오픈카톡방 링크"
+									name="chatroom"
+									type={'url'}
+									setState={setChatRoom}
+									red={Error.chatroom}
+									required
+								></Input>{' '}
+							</div>
 						</div>
-
-						<div className="imgbox">
-							{Image ? (
-								<img src={ImagePreview} alt="" />
-							) : (
-								<div className="default-img">
-									사진을 추가하지 않으면 설정하신 품목에 맞는
-									랜덤 이미지가 배정됩니다.
-								</div>
-							)}
-
-							<label htmlFor="input-file" className="imgbtn">
-								사진추가
-							</label>
-							<input
-								type={'file'}
-								accept="image/*"
-								id="input-file"
-								onChange={handleImage}
-								className="imgsub"
-							/>
-						</div>
+						<Input
+							size="LL"
+							placeholder="오픈카톡방 링크"
+							name="chatroom"
+							type={'url'}
+							setState={setChatRoom}
+							red={Error.chatroom}
+							required
+						></Input>
 					</div>
-					
-					<textarea
-						name="body"
-						id=""
-						cols="30"
-						onChange={handleBody}
-						rows="10"
-						placeholder={
-							Error.body
-								? '본문을 작성해주세요'
-								: '만날 장소와 시간, 구매 방법과 배분방법 등을 간단히 적어주세요.'
-						}
-						className={Error.body ? ' red' : ''}
-					/>
-					<br />
-					<div className="btn">
-						<ButtonGreen function1={submit}>작성하기</ButtonGreen>
+
+					<div className="imgbox">
+						{Image ? (
+							<img src={ImagePreview} alt="" />
+						) : (
+							<div className="default-img">
+								사진을 추가하지 않으면 설정하신 품목에 맞는 랜덤
+								이미지가 배정됩니다.
+							</div>
+						)}
+
+						<label htmlFor="input-file" className="imgbtn">
+							사진추가
+						</label>
+						<input
+							type={'file'}
+							accept="image/*"
+							id="input-file"
+							onChange={handleImage}
+							className="imgsub"
+						/>
 					</div>
 				</div>
+
+				<textarea
+					name="body"
+					id=""
+					cols="30"
+					onChange={handleBody}
+					rows="10"
+					placeholder={
+						Error.body
+							? '본문을 작성해주세요'
+							: '만날 장소와 시간, 구매 방법과 배분방법 등을 간단히 적어주세요.'
+					}
+					className={Error.body ? ' red' : ''}
+				/>
+				<br />
+				<div className="btn">
+					<ButtonGreen function1={submit}>작성하기</ButtonGreen>
+				</div>
+			</div>
 		</EditStyle>
 	);
-
-
-}
+};
 
 export default withRouter(Edit);

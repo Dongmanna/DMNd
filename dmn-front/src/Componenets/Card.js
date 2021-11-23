@@ -99,11 +99,11 @@ const CardStyle=styled.div`
         position:absolute;
         right:1rem;
         bottom:1rem;
-        height:4.5rem;
-        width:4.5rem;
-        line-height:4rem;
+        height:5rem;
+        width:5rem;
+        line-height:1rem;
         font-weight:600;
-        opacity: 0.3;
+        opacity: 0.2;
     }
 
 `

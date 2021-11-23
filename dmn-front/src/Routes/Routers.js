@@ -32,25 +32,25 @@ function Routers() {
 					<SwitchStyle>
 						<Switch>
 							<>
-								<Route exact path="/Chatting">
+								<Route exact path="/chatting">
 									<Chatting />
 								</Route>
-								<Route path="/Detail">
+								<Route path="/detail">
 									<Detail />
 								</Route>
-								<Route exact path="/Edit">
+								<Route exact path="/edit">
 									<Edit />
 								</Route>
 								<Route exact path="/">
 									<Home />
 								</Route>
-								<Route path="/Mypage">
+								<Route path="/mypage">
 									<Mypage />
 								</Route>
-								<Route path="/Result">
+								<Route path="/result">
 									<Result />
 								</Route>
-								<Route exact path="/Write">
+								<Route exact path="/write">
 									<Write />
 								</Route>
 							</>
@@ -62,7 +62,7 @@ function Routers() {
 					<Route exact path="/">
 						<Login setIsLogged={setIsLogged} />
 					</Route>
-					<Route exact path="/SignUp">
+					<Route exact path="/signUp">
 						<SignUp  setIsLogged={setIsLogged}/>
 					</Route>
 				</>

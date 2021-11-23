@@ -263,7 +263,7 @@ const Login = ({ setIsLogged }) => {
 						/>
 						{Error.email?<div className="red">{Error.email[0]}</div>:<div className="border"></div>}
 						<input
-							type="text"
+							type="password"
 							placeholder="Password"
 							name="password"
 							onChange={handlePassWord}
@@ -278,7 +278,7 @@ const Login = ({ setIsLogged }) => {
 								</button>
 							</Link>
 
-							<Link to="/SignUP">
+							<Link to="/signUP">
 								<button>회원가입</button>
 							</Link>
 						</div>
