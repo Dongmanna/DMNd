@@ -1,1 +1,1 @@
-web: gunicorn dmnproject.wsgi --log-file -
+web: gunicorn DMN_final.wsgi --log-file -
