@@ -25,7 +25,7 @@ SECRET_KEY = os.environ.get(
     'SECRET_KEY', 'django-insecure-b8gv!1prt64p=!!miwsahoqfw^(ke_0tnu-5!!a+zp8@^retug')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -127,15 +127,15 @@ DATABASES = {
     }
 }
 
-if DEBUG == False:
-    REST_FRAMEWORK = {
-        'DEFAULT_AUTHENTICATION_CLASSES': (
-            'rest_framework.authentication.TokenAuthentication',
-        ),
-        'DEFAULT_PERMISSION_CLASSES': (
-            'rest_framework.permissions.IsAuthenticated',
-        ),
-    }
+# if DEBUG == False:
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+}
 
 # USER
 

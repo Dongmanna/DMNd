@@ -41,6 +41,8 @@ const InputStyle = styled.input`
 
         border:solid 2px var(--grn-1);
         border-radius:5px;
+        ${(props)=>props.red?`border-bottom:solid 2px red`:""};
+
         overflow:hidden;
         text-overflow:elipsis;
         :focus{
