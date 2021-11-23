@@ -169,7 +169,7 @@ export default function SignUp({setIsLogged}) {
 				password1:Password1,
 				password2:Password2,
 				nickname:Nickname,
-				address:geoInfo,
+				address:Address,
 				// profile_image:null,
 			}
 			);            
