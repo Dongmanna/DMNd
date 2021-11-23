@@ -351,7 +351,7 @@ const Write = () => {
 			}
 		}
 	}
-	console.log(userNow.address)
+	console.log(Error)
 
 	  	return (
 			<WriteStyle>
@@ -384,7 +384,6 @@ const Write = () => {
 										// setState={setRegion}
 										value={userNow.address}
 										red={Error.region}
-										
 									></Input>
 									<Input
 										required
@@ -417,24 +416,24 @@ const Write = () => {
 										typeOn={'date'}
 										red={Error.deadline}
 									></Input>
-<Input
+									<Input
 										size="L"
 										placeholder="관련 링크"
 										name="link"
 										setState={setLinkA}
-										typeOn={'date'}
-										red={Error.deadline}
-									></Input>								</div>
+										red={Error.link}
+									></Input>{' '}
+								</div>
 							</div>
 							<Input
-									size="LL"
-									placeholder="오픈카톡방 링크"
-									name="chatroom"
-									type={'url'}
-									setState={setChatRoom}
-									red={Error.chatroom}
-									required
-								></Input>
+								size="LL"
+								placeholder="오픈카톡방 링크"
+								name="chatroom"
+								type={'url'}
+								setState={setChatRoom}
+								red={Error.chatroom}
+								required
+							></Input>
 						</div>
 
 						<div className="imgbox">
@@ -458,7 +457,7 @@ const Write = () => {
 							/>
 						</div>
 					</div>
-					
+
 					<textarea
 						name="body"
 						id=""

@@ -162,7 +162,7 @@ const DetailStyle = styled.div`
 		margin-bottom: 2rem;
 	}
 	.commentsection {
-		form {
+		.form {
 			width: 100%;
 			display: flex;
 			align-items: center;
@@ -215,6 +215,13 @@ const Detail = ({ location, history }) => {
 
 	//렌더링
 	const [Part, setPart] = useState(false);
+	const [CommentBoolean, setCommentBoolean] = useState(false)
+	const [Comments, setComments] = useState([]);
+	const [commentText, setcommentText] = useState('');
+	const handleCommentText = (e) => {
+		e.preventDefault();
+		setcommentText(e.target.value);
+	};
 	const [post, setpost] = useState(
 		// location.post1===undefined?JSON.parse(sessionStorage.getItem("post")):location.post1
 		// JSON.parse(sessionStorage.getItem('posta'))
@@ -250,15 +257,17 @@ const Detail = ({ location, history }) => {
 			? getPost(location.postid)
 			: getPost(sessionStorage.postid);
 		getComments(post.id);
-	}, [Part,]);
+		setcommentText("")
+		// if(CommentBoolean){
+		// 	// window.scrollTo(0,(document.body.scrollHeight+ "100px");
+		// 	setCommentBoolean(!CommentBoolean)
+		// }
+		
+		
+	}, [Part,CommentBoolean]);
 	//states
 
-	const [Comments, setComments] = useState([]);
-	const [commentText, setcommentText] = useState('');
-	const handleCommentText = (e) => {
-		e.preventDefault();
-		setcommentText(e.target.value);
-	};
+	
 	//Mapping
 	//멤버 목록
 	const members = post.members.map((member) => {
@@ -287,7 +296,7 @@ const Detail = ({ location, history }) => {
 		try {
 			// const token = 'Token ' + localStorage.getItem('user_token');
 			const response = await axios.post(
-				url + id + `/join/`,
+				url + `api/posts/`+id + `/join/`,
 				{
 					_content: '',
 					_content_type: 'application/json',
@@ -324,7 +333,7 @@ const Detail = ({ location, history }) => {
 		try {
 			// const token = 'Token ' + localStorage.getItem('user_token');
 			const response = await axios.get(
-				url + id + `/comments/`,
+				url+`api/posts/` + id + `/comments/`,
 				{
 					headers: {
 						Accept: 'application/json',
@@ -344,7 +353,7 @@ const Detail = ({ location, history }) => {
 		try {
 			// const token = 'Token ' + localStorage.getItem('user_token');
 			const response = await axios.post(
-				url + id + `/doneregister/`,
+				url +`api/posts/`+ id + `/doneregister/`,
 				{},
 				{
 					headers: {
@@ -397,6 +406,7 @@ const Detail = ({ location, history }) => {
 				},
 			}
 		);
+		setCommentBoolean(!CommentBoolean)
 		// window.scrollTo(0,document.body.scrollHeight);
 	}
 	//Get post by id & session storage
@@ -404,7 +414,7 @@ const Detail = ({ location, history }) => {
 		try {
 			// const token = 'Token ' + localStorage.getItem('user_token');
 			const response = await axios.get(
-				url + postid,
+				url + `api/posts/`+postid,
 				{
 					headers: {
 						Accept: 'application/json',
@@ -494,7 +504,7 @@ const Detail = ({ location, history }) => {
 									id={post.id}
 									
 									secondText="카톡방 입장"
-									link = {post.link}
+									link = {post.chatroom}
 								>
 									참가하기!
 								</ButtonGreenA>
@@ -545,7 +555,7 @@ const Detail = ({ location, history }) => {
 					<div className="commentsection">
 						{commentBoxes}
 						<div className="comment-sub">
-							<form>
+							<div className="form">
 								<textarea
 									name="comment"
 									id=""
@@ -553,11 +563,12 @@ const Detail = ({ location, history }) => {
 									rows="10"
 									placeholder="댓글 입력하기"
 									onChange={handleCommentText}
+									value = {commentText}
 								></textarea>
 								<ButtonWhite function1={commentSubmit}>
 									입력
 								</ButtonWhite>
-							</form>
+							</div>
 						</div>
 					</div>
 				) : (
