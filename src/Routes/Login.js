@@ -10,8 +10,10 @@ import login4 from '../img/login4.png';
 // import login7 from '../img/login7.png';
 import axios from 'axios';
 import { withRouter } from 'react-router';
+import url from "../Url"
 
-// import {browserHistory} from 'react-router';
+
+
 
 const LoginStyle = styled.div`
 	width: 100%;
@@ -163,7 +165,7 @@ const Login = ({ setIsLogged }) => {
 		try {
 			const token = 'Token ' + localStorage.getItem('user_token');
 			const response = await axios
-				.get('http://127.0.0.1:8000/api/user/', {
+				.get(url + 'api/user/', {
 					headers: {
 						Accept: 'application/json',
 						'Content-Type': 'application/json',
@@ -183,7 +185,7 @@ const Login = ({ setIsLogged }) => {
 	async function login() {
 		try {
 			await axios
-				.post('http://127.0.0.1:8000/api/login/', {
+				.post(url + 'api/login/', {
 					email: Email,
 					password: PassWord,
 				})
@@ -261,7 +263,7 @@ const Login = ({ setIsLogged }) => {
 						/>
 						{Error.email?<div className="red">{Error.email[0]}</div>:<div className="border"></div>}
 						<input
-							type="text"
+							type="password"
 							placeholder="Password"
 							name="password"
 							onChange={handlePassWord}
@@ -276,7 +278,7 @@ const Login = ({ setIsLogged }) => {
 								</button>
 							</Link>
 
-							<Link to="/SignUP">
+							<Link to="/signUP">
 								<button>회원가입</button>
 							</Link>
 						</div>

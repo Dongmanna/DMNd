@@ -69,9 +69,9 @@ function MainCategory({ phrase, content }) {
             )
         );
     },[content, category]);
-
+    contentData.reverse()
     const cards = contentData.map((post) => (
-		<Link to={{ pathname: '/Detail', postid: post.id }} key={post.id}>
+		<Link to={{ pathname: '/detail', postid: post.id }} key={post.id}>
 			<Card
 				item={post.item}
 				category={post.category}

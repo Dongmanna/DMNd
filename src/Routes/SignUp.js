@@ -5,6 +5,8 @@ import ButtonGreen from '../Componenets/ButtonGreen';
 import Input from '../Componenets/Input';
 import axios from 'axios';
 import styled from 'styled-components';
+import { useHistory, withRouter } from 'react-router';
+import url from "../Url"
 
 const SignUpStyle = styled.div`
 .red{
@@ -75,9 +77,7 @@ const SignUpStyle = styled.div`
 			background-color: white;
 		}
 	}
-	.email input {
-		width: 50%;
-	}
+	
 	select {
 		background-color: transparent;
 		height: 4rem;
@@ -114,7 +114,7 @@ export default function SignUp({setIsLogged}) {
 		try {
 			const token = 'Token ' + localStorage.getItem('user_token');
 			const response = await axios
-				.get('http://127.0.0.1:8000/api/user/', {
+				.get(url + 'api/user/', {
 					headers: {
 						Accept: 'application/json',
 						'Content-Type': 'application/json',
@@ -132,7 +132,7 @@ export default function SignUp({setIsLogged}) {
 	async function login( ) {
 		try {
 			await axios
-				.post('http://127.0.0.1:8000/api/login/', {
+				.post(url + 'api/login/', {
 					email: Email,
 					password: Password1,
 				})
@@ -163,7 +163,7 @@ export default function SignUp({setIsLogged}) {
 	}
 	async function submit(){
         try{
-            const response = await axios.post( "http://127.0.0.1:8000/api/registration/",
+            const response = await axios.post( url + "api/registration/",
 			{
 				email: Email,
 				password1:Password1,
@@ -267,14 +267,13 @@ export default function SignUp({setIsLogged}) {
 						<h2>이메일을 입력해주세요.</h2>
 						<Input
 							type="email"
-							id="email-input"
 							placeholder="이메일"
 							name = "email"
 							setState ={setEmail}
 						/>
-						<h3>@</h3>
-						{Error.email?<div className="red">이메일을 입력해주세요</div>:""}
-
+						{/* <h3>@</h3> */}
+						{Error.email?<div className="red">이메일주소 입력해주세요</div>:""}
+						{Error.email===""}
 						{/* <select name="" id="">
 							<option value="naver.com">naver.com</option>
 							<option value="gmail.com">gmail.com</option>
@@ -288,7 +287,7 @@ export default function SignUp({setIsLogged}) {
 						<Input type="password" placeholder="비밀번호 입력" name="password1" setState ={setPassword1} />
 						{Error.password1?<div className="red">비밀번호를 입력해주세요</div>:<div className="gap"></div>}
 						<Input type="password" placeholder="비밀번호 확인" name="password2" setState ={setPassword2}/>
-						{Error.password2?<div className="red">올바른 비밀번호를 입력해주세요</div>:<div className="gap"></div>}
+						{Error.password2?<div className="red">비밀번호가 다릅니다</div>:<div className="gap"></div>}
 					</div>
 
 					<div className="input-box nickname">

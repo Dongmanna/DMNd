@@ -60,6 +60,7 @@ SITE_ID = 1
 # front corsheaders
 CORS_ORIGIN_WHITELIST = [
     "http://localhost:3000",
+    "https://dongmanna.herokuapp.com",
 ]
 CORS_ALLOW_CREDENTIALS = True
 

@@ -5,6 +5,7 @@ import ButtonGreen from '../Componenets/ButtonGreen';
 import Input from '../Componenets/Input';
 import axios from 'axios';
 import { useHistory, withRouter } from 'react-router';
+import url from "../Url"
 
 // import Cookies from 'js-cookie'
 
@@ -110,13 +111,13 @@ const WriteStyle = styled.div`
 	}
 
 	.imgbtn {
-		width: 6rem;
+		width: 7rem;
 		height: 1.8rem;
 
 		text-align: center;
 		border: 1px solid #b9b9b9;
 		border-radius: 5px;
-		font-size: 1.4rem;
+		font-size: 1.2rem;
 		background-color: #fff;
 		color: #b9b9b9;
 		:hover {
@@ -174,13 +175,17 @@ const WriteStyle = styled.div`
 		right: 21vw;
 	}
 `;
+
 const Write = () => {
 	const token = 'Token ' + localStorage.getItem('user_token');
+	const userNow = JSON.parse(localStorage.getItem('userNow'))
+
 	const [Category, setCategory] = useState('Offline');
 	const [Region, setRegion] = useState('');
 	const [Item, setItem] = useState('');
 	const [Limit, setLimit] = useState('');
 	const [LinkA, setLinkA] = useState('');
+	const [ChatRoom, setChatRoom] = useState("")
 	const [Price, setPrice] = useState('');
 	const [Deadline, setDeadline] = useState(null);
 	const [Body, setBody] = useState('');
@@ -217,13 +222,15 @@ const Write = () => {
 // }
 
 	const handleImage = (e) => {
-		const uploadFile = e.target.files[0];
-		setImage(uploadFile);
-		var reader = new FileReader();
-	reader.onload = function (e) {
-		setImagePreview(e.target.result)
-	};
-	reader.readAsDataURL(e.target.files[0]);
+		if (e.target.files[0]) {
+			const uploadFile = e.target.files[0];
+			setImage(uploadFile);
+			var reader = new FileReader();
+			reader.onload = function (e) {
+				setImagePreview(e.target.result);
+			};
+			reader.readAsDataURL(e.target.files[0]);
+		}
 	};
 
 	axios.defaults.xsrfCookieName = 'csrftoken';
@@ -259,7 +266,7 @@ const Write = () => {
 			try {
 				// const token = 'Token ' + localStorage.getItem('user_token');
 				const response = await axios.post(
-					`http://127.0.0.1:8000/api/posts/` + id + `/doneregister/`,
+					url + `api/posts/` + id + `/doneregister/`,
 					{},
 					{
 						headers: {
@@ -286,10 +293,12 @@ const Write = () => {
     	if(Deadline)formData.append('deadline',Deadline)
     	formData.append('body',Body)
 		formData.append('image',Image)
+		formData.append('chatroom',ChatRoom)
+
 		try {
 			await axios
 				.post(
-					'http://127.0.0.1:8000/api/posts/',
+					url + 'api/posts/',
 					formData
 					,
 					{
@@ -303,7 +312,7 @@ const Write = () => {
 				)
 				.then((res) => {
 					axios.post(
-						`http://127.0.0.1:8000/api/posts/` +
+						url + `api/posts/` +
 							res.data.id +
 							`/join/`,
 						{
@@ -342,7 +351,8 @@ const Write = () => {
 			}
 		}
 	}
-	console.log(Price)
+	console.log(userNow.address)
+
 	  	return (
 			<WriteStyle>
 				<div className="body">
@@ -371,8 +381,10 @@ const Write = () => {
 										required
 										placeholder="지역"
 										name="region"
-										setState={setRegion}
+										// setState={setRegion}
+										value={userNow.address}
 										red={Error.region}
+										
 									></Input>
 									<Input
 										required
@@ -405,16 +417,22 @@ const Write = () => {
 										typeOn={'date'}
 										red={Error.deadline}
 									></Input>
-									<div id="blank"></div>
-								</div>
+<Input
+										size="L"
+										placeholder="관련 링크"
+										name="link"
+										setState={setLinkA}
+										typeOn={'date'}
+										red={Error.deadline}
+									></Input>								</div>
 							</div>
 							<Input
 									size="LL"
 									placeholder="오픈카톡방 링크"
-									name="link"
+									name="chatroom"
 									type={'url'}
-									setState={setLinkA}
-									red={Error.link}
+									setState={setChatRoom}
+									red={Error.chatroom}
 									required
 								></Input>
 						</div>
@@ -424,8 +442,7 @@ const Write = () => {
 								<img src={ImagePreview} alt="" />
 							) : (
 								<div className="default-img">
-									사진을 추가하지 않으면 설정하신 품목에 맞는
-									랜덤 이미지가 배정됩니다.
+									사진을 추가해주세요
 								</div>
 							)}
 
