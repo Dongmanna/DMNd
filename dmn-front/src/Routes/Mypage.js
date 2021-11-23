@@ -10,16 +10,16 @@ const MypageStyle = styled.div`
 		opacity: 0;
 	}
 	.imgbtn {
-		width: 6rem;
+		width: 8rem;
 		object-fit: cover;
 		height: 1.8rem;
 		position: absolute;
 		top: 19.5vw;
-		left: 23vw;
+		left: calc(25vw - 4rem);
 		text-align: center;
 		border: 1px solid #b9b9b9;
 		border-radius: 5px;
-		font-size: 1.4rem;
+		font-size: 1.2rem;
 		background-color: #fff;
 		color: #b9b9b9;
 		:hover {
@@ -138,11 +138,11 @@ const MyPage = () => {
 			setImagePreview(e.target.result);
 		};
 		reader.readAsDataURL(e.target.files[0]);
+		submit(e.target.files[0])
 	};
-	async function submit() {
+	async function submit(imagep) {
 		const token = 'Token ' + localStorage.getItem('user_token');
-		formData.append('profile_image', Image);
-        console.log(Image);
+		formData.append('profile_image', imagep);
         formData.append('address',Address)
 		try {
 			await axios.put(
@@ -219,19 +219,11 @@ const MyPage = () => {
 				<img
 					className="profileimg"
 					src={
-						userNow.profile_image
-							? userNow.profile_image
-							: ImagePreview
-							? ImagePreview
-							: avatar
+						ImagePreview?ImagePreview:userNow.profile_image?userNow.profile_image:avatar
 					}
 					alt=""
 				/>
-				{Image ? (
-					<div className="imgbtn" onClick={submit}>
-						사진 추가!
-					</div>
-				) : (
+				
 					<>
 						<label htmlFor="input-file" className="imgbtn">
 							사진선택
@@ -244,7 +236,7 @@ const MyPage = () => {
 							className="imgsub"
 						/>
 					</>
-				)}
+				
 				<div className="infos">
 					<div className="nickname">{userNow.nickname}</div>{' '}
 					<div className="loc">{userNow.address}</div>

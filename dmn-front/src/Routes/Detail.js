@@ -10,6 +10,7 @@ import avatar from '../img/avatar-pl.png';
 import { withRouter } from 'react-router';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import url from "../Url"
 
 const DetailStyle = styled.div`
 	font-family: 'NIXGONM-Vb';
@@ -200,6 +201,7 @@ const DetailStyle = styled.div`
 		}
 	}
 `;
+
 //member 수 6명 이상이면 flex다시 설정해야해
 const Detail = ({ location, history }) => {
 	const token = 'Token ' + localStorage.getItem('user_token');
@@ -210,10 +212,10 @@ const Detail = ({ location, history }) => {
 		// location.post1===undefined?JSON.parse(sessionStorage.getItem("post")):location.post1
 		// JSON.parse(sessionStorage.getItem('posta'))
 		{
-			url: 'http://127.0.0.1:8000/api/posts/3/',
+			url: url + 'api/posts/3/',
 			id: 0,
 			author: {
-				url: 'http://127.0.0.1:8000/api/users/1/',
+				url: url + 'api/users/1/',
 				id: 1,
 				email: 'misby0327@gmail.com',
 				nickname: '이',
@@ -231,7 +233,7 @@ const Detail = ({ location, history }) => {
 			deadline: '2021-11-27T19:20:00+09:00',
 			members: [
 				{
-					url: 'http://127.0.0.1:8000/api/users/1/',
+					url: url + 'api/users/1/',
 					id: 1,
 					email: 'misby0327@gmail.com',
 					nickname: '이',
@@ -239,7 +241,7 @@ const Detail = ({ location, history }) => {
 					profile_image: null,
 				},
 				{
-					url: 'http://127.0.0.1:8000/api/users/2/',
+					url: url + 'api/users/2/',
 					id: 2,
 					email: 'robot0327@naver.com',
 					nickname: '리',
@@ -315,7 +317,7 @@ const Detail = ({ location, history }) => {
 	async function deletePost() {
 		// const token = 'Token ' + localStorage.getItem('user_token');
 
-		await axios.delete('http://127.0.0.1:8000/api/posts/' + post.id + '/', {
+		await axios.delete(url + 'api/posts/' + post.id + '/', {
 			headers: {
 				Accept: 'application/json',
 				'Content-Type': 'application/json',
@@ -389,7 +391,7 @@ const Detail = ({ location, history }) => {
 	//댓글 입력
 	async function commentSubmit() {
 		await axios.post(
-			'http://127.0.0.1:8000/api/comments/',
+			url + 'api/comments/',
 			{
 				post: post.url,
 				author: JSON.parse(localStorage.userNow),

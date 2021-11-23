@@ -5,6 +5,7 @@ import "../css/Home.css"
 import SearchBar from '../Componenets/SearchBar';
 import styled from "styled-components";
 import axios from 'axios';
+import url from "../Url"
 
 const HomeStyle = styled.main`
     .search-box{
@@ -66,7 +67,7 @@ const Home = () => {
     //url에서 정보 받아오기
     async function getContent(){
         try{
-            const response = await axios.get( "http://127.0.0.1:8000/api/posts/");            
+            const response = await axios.get( url +"api/posts/");            
             await setContent(response.data);
         }catch(error){
             console.error(error)

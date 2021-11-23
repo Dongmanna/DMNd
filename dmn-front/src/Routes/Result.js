@@ -5,6 +5,7 @@ import styled from "styled-components";
 import MainCategory from "../Componenets/MainCategory";
 import SearchBarResult from "../Componenets/SearchBarResult";
 import axios from 'axios';
+import url from "../Url"
 
 
 
@@ -17,6 +18,7 @@ const ResultStyle=styled.div`
     margin-bottom: 10rem;
 }
 `
+
 const Result = ({location}) => {
     const word = location.word; 
     const [searchText, setsearchText] = useState(word); 
@@ -26,7 +28,7 @@ const Result = ({location}) => {
     //url에서 정보 받아오기
     async function getContent(){
         try{
-            const response = await axios.get("http://127.0.0.1:8000/api/posts/");
+            const response = await axios.get(url + "api/posts/");
             setResultData(()=> response.data.filter((post) => post.title.match(searchText)));
 
         }catch(error){

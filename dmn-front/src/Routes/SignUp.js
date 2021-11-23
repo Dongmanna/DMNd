@@ -4,6 +4,7 @@ import Input from '../Componenets/Input';
 import ButtonGreen from '../Componenets/ButtonGreen';
 import axios from 'axios';
 import { useHistory, withRouter } from 'react-router';
+import url from "../Url"
 
 const SignUpStyle = styled.div`
 .red{
@@ -113,7 +114,7 @@ export default function SignUp({setIsLogged}) {
 		try {
 			const token = 'Token ' + localStorage.getItem('user_token');
 			const response = await axios
-				.get('http://127.0.0.1:8000/api/user/', {
+				.get(url + 'api/user/', {
 					headers: {
 						Accept: 'application/json',
 						'Content-Type': 'application/json',
@@ -131,7 +132,7 @@ export default function SignUp({setIsLogged}) {
 	async function login( ) {
 		try {
 			await axios
-				.post('http://127.0.0.1:8000/api/login/', {
+				.post(url + 'api/login/', {
 					email: Email,
 					password: Password1,
 				})
@@ -162,7 +163,7 @@ export default function SignUp({setIsLogged}) {
 	}
 	async function submit(){
         try{
-            const response = await axios.post( "http://127.0.0.1:8000/api/registration/",
+            const response = await axios.post( url + "api/registration/",
 			{
 				email: Email,
 				password1:Password1,

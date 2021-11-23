@@ -5,7 +5,7 @@ const ButtonGrayStyle=styled.button`
     height: 3rem;
     border: 1px solid #B9B9B9;
     border-radius: 5px;
-    font-size:1.4rem;
+    font-size:1.2rem;
     background-color: #fff;
     color:#B9B9B9;
     :hover{

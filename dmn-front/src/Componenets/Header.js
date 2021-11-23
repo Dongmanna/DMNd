@@ -6,7 +6,8 @@ import logo from "../img/logo.png"
 const HeaderStyle = styled.div`
 img{
 	width:20rem;
-	margin-left:3rem;
+	margin-left:5vw;
+	margin-top:2rem;
 	object-fit: cover;
 
 

@@ -6,6 +6,7 @@ import ButtonGreen from "../Componenets/ButtonGreen";
 import Input from "../Componenets/Input"
 import axios from "axios";
 import { useHistory, withRouter } from 'react-router';
+import url from "../Url"
 
 const EditStyle = styled.div`
 
@@ -173,14 +174,18 @@ font-family: 'NIXGONM-Vb';
 		right: 21vw;
 	}
 `;
+
 const Edit = ({location}) => {
 	const post = location.post;
+	const userNow = localStorage.getItem('userNow')
 	const token = 'Token ' + localStorage.getItem('user_token');
 	const [Category, setCategory] = useState(post.category);
-	const [Region, setRegion] = useState(post.region);
+	const [Region, setRegion] = useState(userNow.region);
 	const [Item, setItem] = useState(post.item);
 	const [Limit, setLimit] = useState(post.limit);
 	const [LinkA, setLinkA] = useState(post.link);
+	const [ChatRoom, setChatRoom] = useState("")
+
 	const [Price, setPrice] = useState(post.price);
 	const [Deadline, setDeadline] = useState(null);
 	const [Body, setBody] = useState(post.body);
@@ -259,7 +264,7 @@ const Edit = ({location}) => {
 		// 	try {
 		// 		// const token = 'Token ' + localStorage.getItem('user_token');
 		// 		const response = await axios.put(
-		// 			`http://127.0.0.1:8000/api/posts/` + id + `/doneregister/`,
+		// 			url + `api/posts/` + id + `/doneregister/`,
 		// 			{},
 		// 			{
 		// 				headers: {
@@ -286,10 +291,12 @@ const Edit = ({location}) => {
     	if(Deadline)formData.append('deadline',Deadline)
     	formData.append('body',Body)
 		if(Image)formData.append('image',Image)
+		formData.append('chatroom',ChatRoom)
+
 		try {
 			await axios
 				.put(
-					'http://127.0.0.1:8000/api/posts/'+post.id+"/",
+					url + 'api/posts/'+post.id+"/",
 					formData
 					,
 					{
@@ -324,7 +331,7 @@ const Edit = ({location}) => {
 			}
 		}
 	}
-	
+	console.log(userNow.region)
     return (
 		<EditStyle>
 	<div className="body">
@@ -353,8 +360,8 @@ const Edit = ({location}) => {
 										required
 										placeholder="지역"
 										name="region"
-										setState={setRegion}
 										red={Error.region}
+										value = {userNow.region}
 									></Input>
 									<Input
 										required
@@ -387,16 +394,23 @@ const Edit = ({location}) => {
 										typeOn={'date'}
 										red={Error.deadline}
 									></Input>
-									<div id="blank"></div>
-								</div>
+<Input
+									size="LL"
+									placeholder="오픈카톡방 링크"
+									name="chatroom"
+									type={'url'}
+									setState={setChatRoom}
+									red={Error.chatroom}
+									required
+								></Input>								</div>
 							</div>
 							<Input
 									size="LL"
 									placeholder="오픈카톡방 링크"
-									name="link"
+									name="chatroom"
 									type={'url'}
-									setState={setLinkA}
-									red={Error.link}
+									setState={setChatRoom}
+									red={Error.chatroom}
 									required
 								></Input>
 						</div>
