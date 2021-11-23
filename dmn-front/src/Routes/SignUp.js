@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
-import Input from '../Componenets/Input';
-import ButtonGreen from '../Componenets/ButtonGreen';
-import axios from 'axios';
 import { useHistory, withRouter } from 'react-router';
+
+import ButtonGreen from '../Componenets/ButtonGreen';
+import Input from '../Componenets/Input';
+import axios from 'axios';
+import styled from 'styled-components';
 
 const SignUpStyle = styled.div`
 .red{
@@ -105,7 +106,7 @@ export default function SignUp({setIsLogged}) {
 	const [Password1, setPassword1] = useState("")
 	const [Password2, setPassword2] = useState("")
 	const [Nickname, setNickname] = useState("")
-	// const [Address, setAddress] = useState("")
+	const [Address, setAddress] = useState("")
 	const [Error, setError] = useState([])
 	const [geoInfo, setgeoInfo] = useState("")
 
@@ -305,7 +306,7 @@ export default function SignUp({setIsLogged}) {
 						<h2>
 							현재 위치하신 주소가 자동으로 입력됩니다. 위치 권한을 허용해주세요.
 						</h2>
-						<Input type="text" placeholder="주소" name = "address" value = {geoInfo }/>
+						<Input type="text" placeholder="주소" name = "address" setState = {setAddress}/>
 						{Error.address?<div className="red">주소를 입력해주세요</div>:""}
 					</div>
 						<ButtonGreen function1 = {submit}>가입하기</ButtonGreen>

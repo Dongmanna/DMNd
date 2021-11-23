@@ -1,0 +1,1 @@
+web: gunicorn dmnproject.wsgi --log-file -
