@@ -222,13 +222,15 @@ const Write = () => {
 // }
 
 	const handleImage = (e) => {
-		const uploadFile = e.target.files[0];
-		setImage(uploadFile);
-		var reader = new FileReader();
-	reader.onload = function (e) {
-		setImagePreview(e.target.result)
-	};
-	reader.readAsDataURL(e.target.files[0]);
+		if (e.target.files[0]) {
+			const uploadFile = e.target.files[0];
+			setImage(uploadFile);
+			var reader = new FileReader();
+			reader.onload = function (e) {
+				setImagePreview(e.target.result);
+			};
+			reader.readAsDataURL(e.target.files[0]);
+		}
 	};
 
 	axios.defaults.xsrfCookieName = 'csrftoken';
