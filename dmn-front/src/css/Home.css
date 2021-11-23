@@ -81,6 +81,8 @@
     z-index: 1;
     display:flex;
     align-items:left;
+    top: 54vh;
+    left: 1vh;
 }
 
 svg text{
@@ -90,8 +92,8 @@ svg text{
     left:347px;
     top:585px; */
     font-family: 'InkLipquid';
-    font-size: 50px;
-    line-height: 24px;
+    font-size: 5rem;
+    line-height: 242px;
     fill:transparent;
     stroke-dasharray: 326px;
     animation: stroke 0.5s linear;
