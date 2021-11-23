@@ -200,6 +200,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'build/static')
 ]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # 이미지를 위한 설정
 MEDIA_URL = '/media/'
