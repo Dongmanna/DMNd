@@ -1,12 +1,21 @@
 import React, { useEffect, useState } from 'react';
-// import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import { useHistory, withRouter } from 'react-router';
+
 import ButtonGreen from '../Componenets/ButtonGreen';
 import Input from '../Componenets/Input';
-import axios from 'axios';
-import { useHistory, withRouter } from 'react-router';
-import url from '../Url';
 import Modal from 'react-modal';
+import axios from 'axios';
+import styled from 'styled-components';
+import url from '../Url';
+
+// import { Link } from 'react-router-dom';
+
+
+
+
+
+
+
 
 // import Cookies from 'js-cookie'
 
@@ -175,6 +184,7 @@ const WriteStyle = styled.div`
 `;
 const customStyles = {
 	content: {
+		zIndex: 3,
 		top: '45%',
 		left: '50%',
 		right: 'auto',

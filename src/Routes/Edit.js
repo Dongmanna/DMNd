@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import SearchHeader from '../Componenets/SearchHeader';
-import styled from 'styled-components';
+import { useHistory, withRouter } from 'react-router';
+
 import ButtonGreen from '../Componenets/ButtonGreen';
 import Input from '../Componenets/Input';
+import { Link } from 'react-router-dom';
+import SearchHeader from '../Componenets/SearchHeader';
 import axios from 'axios';
-import { useHistory, withRouter } from 'react-router';
+import styled from 'styled-components';
 import url from '../Url';
 
 const EditStyle = styled.div`
@@ -286,7 +287,7 @@ const Edit = ({ location }) => {
 		formData.append('item', Item);
 		formData.append('limit', Limit);
 		formData.append('link', LinkA);
-		formData.append('price', Price);
+		if (Price)formData.append('price', Price);
 		if (Deadline) formData.append('deadline', Deadline);
 		formData.append('body', Body);
 		if (Image) formData.append('image', Image);
@@ -302,7 +303,7 @@ const Edit = ({ location }) => {
 				},
 			});
 
-			history.push('/');
+			history.push({ pathname: '/detail', postid: post.id });
 		} catch (error) {
 			if (error.response) {
 				/*

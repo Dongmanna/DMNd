@@ -6,12 +6,12 @@ import ButtonWhite from '../Componenets/ButtonWhite';
 import CommentBox from '../Componenets/CommentBox';
 import { Link } from 'react-router-dom';
 import MemberProfile from '../Componenets/MemberProfile';
+import Modal from 'react-modal';
 import avatar from '../img/avatar-pl.png';
 import axios from 'axios';
 import styled from 'styled-components';
 import url from "../Url"
 import { withRouter } from 'react-router';
-import Modal from 'react-modal';
 
 // import temp_image1 from "../img/temp_image1.png"
 
@@ -248,27 +248,27 @@ const Detail = ({ location, history }) => {
 		// location.post1===undefined?JSON.parse(sessionStorage.getItem("post")):location.post1
 		// JSON.parse(sessionStorage.getItem('posta'))
 		{
-			url: url + 'api/posts/3/',
+			url: url + 'api/posts/0/',
 			id: 0,
 			author: {
-				url: url + 'api/users/1/',
-				id: 1,
-				email: 'misby0327@gmail.com',
-				nickname: '이',
-				address: '마포구 공덕동',
-				profile_image: null,
+			   url: url + 'api/users/0/',
+			   id: 0,
+			   email: 'abcd@mail.com',
+			   nickname: '동만나',
+			   address: '동네',
+			   profile_image: null,
 			},
 			category: 'Offline',
-			title: '양파',
-			pub_date: '2021-11-12T19:21:07.434249+09:00',
-			body: '양파 같이 살 착한 사람 구해요',
-			region: '마포구 공덕동',
-			item: '양파',
-			limit: 3,
+			title: '로딩중입니다',
+			pub_date: '2021-08-23',
+			body: '불러오는 중 ---',
+			region: '',
+			item: '로딩중',
+			limit: 4,
 			link: '',
-			deadline: '2021-11-27T19:20:00+09:00',
+			deadline: '2021-08-23',
 			members: [
-				
+			   
 			],
 			image: null,
 			done: false,
@@ -574,9 +574,9 @@ const Detail = ({ location, history }) => {
 					<div className="textarea">{post.body} </div>
 				)}
 				<div className="btnsection">
-					<ButtonWhite function1={() => setModalOpen(true)}>
-						구매완료
-					</ButtonWhite>
+					{Part?<ButtonWhite function1={() => setModalOpen(true)}>
+                		구매완료
+               		</ButtonWhite>:""}
 					{post.author.url ===
 					JSON.parse(localStorage.userNow).url ? (
 						<>

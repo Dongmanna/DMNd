@@ -64,13 +64,13 @@ export default function Input({size, placeholder, required, type, setState, name
     // const [text, setText] = useState("");
     const handleText = async function(e){
         e.preventDefault();
-        if (e.target.value){
+        // if (e.target.value){
             // setText(e.target.value);
             if (setState){
                 setState(e.target.value)
             
             }
-        }
+        // }
     }
     
     const onfocus = (e)=>{e.currentTarget.type = typeOn;}
