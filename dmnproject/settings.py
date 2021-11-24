@@ -21,7 +21,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY')
+
+# 배포시 2번째 인자 값 삭제
+SECRET_KEY = os.environ.get('SECRET_KEY', 
+    'django-insecure-b8gv!1prt64p=!!miwsahoqfw^(ke_0tnu-5!!a+zp8@^retug')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = (os.environ.get('DEBUG', 'TRUE') != 'False')
@@ -62,21 +65,6 @@ CORS_ORIGIN_WHITELIST = [
     "https://dongmanna.herokuapp.com",
 ]
 CORS_ALLOW_CREDENTIALS = True
-
-
-# 배포시 보안
-# if DEBUG == False:
-#     CSRF_COOKIE_SECURE = True
-#     SESSION_COOKIE_SECURE = True
-#     SECURE_SSL_REDIRECT = True
-
-
-# CSRF_COOKIE_NAME = "csrftoken"
-# CSRF_HEADER_NAME = "X-CSRFToken"
-# CSRF_COOKIE_HTTPONLY = False
-# CSRF_USE_SESSIONS  = False
-# CSRF_COOKIE_SAMESITE = None
-
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
@@ -126,15 +114,15 @@ DATABASES = {
     }
 }
 
-# if DEBUG == False:
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.TokenAuthentication',
-    ),
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
-    ),
-}
+# 배포시 주석 풀기
+# REST_FRAMEWORK = {
+#     'DEFAULT_AUTHENTICATION_CLASSES': (
+#         'rest_framework.authentication.TokenAuthentication',
+#     ),
+#     'DEFAULT_PERMISSION_CLASSES': (
+#         'rest_framework.permissions.IsAuthenticated',
+#     ),
+# }
 
 # USER
 
@@ -199,6 +187,8 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+DATETIME_FORMAT = "%Y-%m-%d %A %h:%i"
 
 
 # Static files (CSS, JavaScript, Images)
