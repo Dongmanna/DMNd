@@ -13,11 +13,7 @@ import styled from 'styled-components';
 import url from "../Url"
 import { withRouter } from 'react-router';
 
-// import temp_image1 from "../img/temp_image1.png"
-
-
-
-
+import temp_image1 from "../img/temp_image1.png"
 
 
 const DetailStyle = styled.div`
@@ -64,15 +60,19 @@ const DetailStyle = styled.div`
 			border-bottom: solid 0.3rem #f2f2f2;
 			.title-date {
 				width: 60%;
-
+				:hover{
+						width:100rem;
+						float:right;
+					}
 				.title {
 					font-family: 'Roboto';
 
 					width: 100%;
-					font-size: 2.2rem;
+					font-size: 2rem;
 					overflow: hidden;
 					text-overflow: ellipsis;
-					height: 4rem;
+					height: 2.5rem;
+					
 				}
 				.date {
 					width: 100%;
@@ -158,6 +158,7 @@ const DetailStyle = styled.div`
 		padding: 5%;
 		padding-bottom: 2%;
 		display: flex;
+		flex-wrap: wrap;
 		justify-content: flex-start;
 		border-bottom: solid 0.2rem;
 		margin-bottom: 2rem;
@@ -228,6 +229,7 @@ const customStyles = {
 		borderRadius: "10px",
 		
 	},
+	overlay: {zIndex: 3}
 };
 //member 수 6명 이상이면 flex다시 설정해야해
 const Detail = ({ location, history }) => {
@@ -240,6 +242,7 @@ const Detail = ({ location, history }) => {
 	const [CommentBoolean, setCommentBoolean] = useState(false)
 	const [Comments, setComments] = useState([]);
 	const [commentText, setcommentText] = useState('');
+	const [IsDone, setIsDone] = useState(false)
 	const handleCommentText = (e) => {
 		e.preventDefault();
 		setcommentText(e.target.value);
@@ -297,12 +300,13 @@ const Detail = ({ location, history }) => {
 		return (
 			<MemberProfile
 				key={member.url}
-				img={post.author.profile_image}
+				img={member.profile_image}
 				nickname={member.nickname}
 				author={isAuthor}
 			></MemberProfile>
 		);
 	});
+	//멤버 정렬
 	//댓글 목록
 	const commentBoxes = Comments.map((comment) => {
 		return (
@@ -410,7 +414,21 @@ const Detail = ({ location, history }) => {
 				console.error(error);
 			}
 		}
-
+	//구매완료한 사람 리스트 받아오기
+	async function getIsDone() {
+		const response = await axios.get(
+			url +`api/posts/`+ post.id + `/doneregister/`,		
+			{
+				headers: {
+					Accept: 'application/json',
+					'Content-Type': 'application/json',
+					Authorization: token,
+				},
+			}
+		
+		);
+		setIsDone(response.data[0].users.some((member)=>member === JSON.parse(localStorage.userNow).url))
+	}
 	//댓글 입력
 	async function commentSubmit() {
 		await axios.post(
@@ -446,7 +464,6 @@ const Detail = ({ location, history }) => {
 				}
 			);
 			await setpost(response.data);
-			console.log(response.data)
 
 			await sessionStorage.setItem('postid', postid);
 			await sessionStorage.setItem(
@@ -462,6 +479,7 @@ const Detail = ({ location, history }) => {
 			) {
 				setPart(true);
 			}
+			await getIsDone()
 		} catch (error) {
 			console.error(error);
 		}
@@ -478,7 +496,8 @@ const Detail = ({ location, history }) => {
 			>
 				구매 완료시에만 눌러주세요
 				<div className="modalbtn">
-					<ButtonGray function1={done} id={post.id}>구매 완료</ButtonGray>
+					<ButtonGray function1={done} function2={() => 
+						setModalOpen(false)} id={post.id}>구매 완료</ButtonGray>
 				<ButtonGray
 					function1={() => {
 						setModalOpen(false);
@@ -491,7 +510,7 @@ const Detail = ({ location, history }) => {
 			<div className="body">
 				<div className="top">
 					<div className="left">
-						<img src={post.image} alt="사진이 없습니다." />
+						<img src={post.image?post.image:temp_image1} alt="사진이 없습니다." />
 					</div>
 					<div className="right">
 						<p className="category">{post.category}</p>
@@ -531,9 +550,9 @@ const Detail = ({ location, history }) => {
 								<br />
 								<div className="type">마감기한</div>{' '}
 								{post.deadline ? post.deadline : '미정'} <br />
-								{/* <div className="type">링크</div>{' '}
+								<div className="type">링크</div>{' '}
 								<div className="link">{post.link ? post.link : '미정'}</div> 
-								<br /> */}
+								<br />
 							</div>
 						</div>
 						<div className="btntop">
@@ -556,15 +575,15 @@ const Detail = ({ location, history }) => {
 							{post.author.url ===
 							JSON.parse(localStorage.userNow).url ? (
 								''
-							) : (
+							) : Part&&post.members.length < post.limit &&!IsDone?
 								<ButtonGray
 									setPart={setPart}
 									function1={join}
 									id={post.id}
 								>
 									참가 취소
-								</ButtonGray>
-							)}
+								</ButtonGray>:""
+							}
 						</div>
 					</div>
 				</div>
@@ -574,7 +593,7 @@ const Detail = ({ location, history }) => {
 					<div className="textarea">{post.body} </div>
 				)}
 				<div className="btnsection">
-					{Part?<ButtonWhite function1={() => setModalOpen(true)}>
+					{Part&&!IsDone?<ButtonWhite function1={() => setModalOpen(true)}>
                 		구매완료
                		</ButtonWhite>:""}
 					{post.author.url ===
@@ -592,7 +611,7 @@ const Detail = ({ location, history }) => {
 					)}
 				</div>
 				<div className="membersection">{members}</div>
-				{Part ? (
+				
 					<div className="commentsection">
 						{commentBoxes}
 						<div className="comment-sub">
@@ -612,9 +631,7 @@ const Detail = ({ location, history }) => {
 							</div>
 						</div>
 					</div>
-				) : (
-					''
-				)}
+				
 			</div>
 		</DetailStyle>
 	);

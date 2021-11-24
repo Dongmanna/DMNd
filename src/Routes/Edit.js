@@ -174,7 +174,8 @@ const EditStyle = styled.div`
 `;
 
 const Edit = ({ location }) => {
-	const post = location.post;
+	const post = location.post?location.post:JSON.parse(sessionStorage.getItem('post'));
+	sessionStorage.setItem('post', JSON.stringify(post));
 	const userNow = localStorage.getItem('userNow');
 	const token = 'Token ' + localStorage.getItem('user_token');
 	const [Category, setCategory] = useState(post.category);

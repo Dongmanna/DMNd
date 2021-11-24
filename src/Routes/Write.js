@@ -11,12 +11,6 @@ import url from '../Url';
 // import { Link } from 'react-router-dom';
 
 
-
-
-
-
-
-
 // import Cookies from 'js-cookie'
 
 const WriteStyle = styled.div`
@@ -202,6 +196,7 @@ const customStyles = {
 		borderRadius: "10px",
 		
 	},
+	overlay: {zIndex: 3}
 };
 
 const Write = () => {
@@ -374,7 +369,6 @@ const Write = () => {
 			}
 		}
 	}
-	console.log(Error);
 
 	return (
 		<WriteStyle>

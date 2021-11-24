@@ -2,6 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 const ButtonGrayStyle=styled.button`
     width: 8rem;
+    min-width:8rem;
+
     height: 3rem;
     border: 1px solid #B9B9B9;
     border-radius: 5px;
@@ -17,11 +19,13 @@ const ButtonGrayStyle=styled.button`
     }
     
     `
-export default function ButtonGray({children, setPart, function1, id}) {
+export default function ButtonGray({children, setPart, function1,function2, id}) {
     
     const cancel= ()=>{
         function1(id);
         if(setPart)setPart(false)
+        if(function2)function2()
+
     }
     return (
         <ButtonGrayStyle onClick={cancel}>

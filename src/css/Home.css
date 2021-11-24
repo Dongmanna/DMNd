@@ -82,7 +82,12 @@
     display:flex;
     align-items:left;
     top: 54vh;
-    left: 1vh;
+    left: 15vw;
+
+}
+@media(max-width:600px){
+    .slogan-box{
+    top:35vh;}
 }
 
 svg text{

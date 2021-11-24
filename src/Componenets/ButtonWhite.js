@@ -1,8 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 const ButtonWhiteStyle=styled.button`
-    width: 12rem;
-    max-width:12vw;
+    width: 10rem;
+    /* max-width:13vw; */
+    min-width:5rem;
     margin: 0 1rem;
     height: 3rem;  
     background: #FFFFFF;

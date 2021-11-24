@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-// import temp_img from "../img/temp_image1.png"
+import temp_img from "../img/temp_image1.png"
 
 const CardStyle=styled.div`
     width:20vw;
@@ -112,7 +112,7 @@ export default function Card({children, hot, img, item, num, category} ) {
         <CardStyle>
             {hot?<div className="red-sign">마감임박</div>:"" }
             <div className="card">
-                <img src={img} alt="사진" /> 
+                <img src={img?img:temp_img} alt="사진" /> 
 
                 <div className="container">
                     <p>품목  {item}</p> 

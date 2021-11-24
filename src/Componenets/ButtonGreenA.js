@@ -16,7 +16,7 @@ const ButtonGreenAStyle = styled.button`
     bottom: 0;
     left: 0;
     width: ${(props) => props.phase===1?0:20}rem;
-    max-width:18vw;
+    max-width:20vw;
 
     height: 6.4rem;
     background-color: var(--grn-2);
@@ -29,7 +29,7 @@ const ButtonGreenAStyle = styled.button`
     bottom: 0;
     right: 0;
     width: ${(props) => props.phase===1?20:0}rem;
-    max-width:18vw;
+    max-width:20vw;
 
     height: 6.4rem;
     background-color: var(--grn-1);
@@ -38,7 +38,7 @@ const ButtonGreenAStyle = styled.button`
     }
 
     width:20rem;
-    max-width:18vw;
+    max-width:20vw;
 
     height:6.4rem;
     

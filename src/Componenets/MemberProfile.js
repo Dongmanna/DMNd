@@ -3,12 +3,12 @@ import styled from 'styled-components'
 import avatar from "../img/avatar-pl.png"
 
 const MemberProfileStyle=styled.div`
-    width:13vw;
-    min-width:20rem;
+    width:20%;
+    min-width:10rem;
     img{
         overflow: hidden;
-        width: 5rem;
-        height: 5rem;
+        width: 4rem;
+        height: 4rem;
         border-radius: 40px;
         background-color:#f2f2f2;
         object-fit: cover;
@@ -19,12 +19,12 @@ const MemberProfileStyle=styled.div`
         font-size:1.5rem;
     }
     .author-tag{
-        width:5rem;
+        width:4.5rem;
         font-size:.7rem;
         height:1.5rem;
         line-height: 1.5rem;
         text-align: center;
-        margin-left:2rem;
+        margin-left:.2rem;
         background-color: #f2f2f2;
         display: inline-block;
     }

@@ -62,8 +62,8 @@ const MypageCard = ({ content, categoryM }) => {
 
         }
     },[content, categoryM])
-    const cards = postData && postData.map((post) => (
-        <Link to={{ pathname: '/Detail', post1: post }} key={post.id}>
+    const cards =  postData.map((post) => (
+        <Link to={{ pathname: '/detail', postid: post.id }} key={post.id}>
 			<Card
 				item={post.item}
 				category={post.category}
