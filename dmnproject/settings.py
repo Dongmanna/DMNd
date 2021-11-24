@@ -228,7 +228,7 @@ AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = 'dmnbucket'
 AWS_S3_SIGNATURE_VERSION = 's3v4'
 AWS_S3_REGION_NAME = 'ap-northeast-2'
-AWS_S3_CUSTOM_DOMAIN = 'https://dmnbucket.s3.ap-northeast-2.amazonaws.com/'
+AWS_S3_CUSTOM_DOMAIN = 'dmnbucket.s3.ap-northeast-2.amazonaws.com'
 
 
 # 배포, 맨 밑에 작성
