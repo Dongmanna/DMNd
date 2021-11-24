@@ -21,7 +21,7 @@ export default function ButtonGray({children, setPart, function1, id}) {
     
     const cancel= ()=>{
         function1(id);
-        setPart(false)
+        if(setPart)setPart(false)
     }
     return (
         <ButtonGrayStyle onClick={cancel}>

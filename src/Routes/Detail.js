@@ -11,6 +11,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 import url from "../Url"
 import { withRouter } from 'react-router';
+import Modal from 'react-modal';
 
 // import temp_image1 from "../img/temp_image1.png"
 
@@ -208,13 +209,34 @@ const DetailStyle = styled.div`
 		}
 	}
 `;
-
+const customStyles = {
+	content: {
+		top: '45%',
+		left: '50%',
+		right: 'auto',
+		bottom: 'auto',
+		marginRight: '-50%',
+		transform: 'translate(-50%, -50%)',
+		width: '40rem',
+		fontSize: '2rem',
+		display: 'flex',
+		justifyContent: 'space-evenly',
+		alignItems: 'center',
+		flexDirection: 'column',
+		height: '40rem',
+		fontFamily: 'NIXGONM-Vb',
+		borderRadius: "10px",
+		
+	},
+};
 //member 수 6명 이상이면 flex다시 설정해야해
 const Detail = ({ location, history }) => {
 	const token = 'Token ' + localStorage.getItem('user_token');
 
 	//렌더링
 	const [Part, setPart] = useState(false);
+	const [ModalOpen, setModalOpen] = useState(false);
+
 	const [CommentBoolean, setCommentBoolean] = useState(false)
 	const [Comments, setComments] = useState([]);
 	const [commentText, setcommentText] = useState('');
@@ -373,7 +395,7 @@ const Detail = ({ location, history }) => {
 			try {
 				// const token = 'Token ' + localStorage.getItem('user_token');
 				const response = await axios.post(
-					url + id + `/done/`,
+					url +`api/posts/`+ id + `/done/`,
 					{},
 					{
 						headers: {
@@ -383,7 +405,7 @@ const Detail = ({ location, history }) => {
 						},
 					}
 				);
-				console.log('done');
+				setModalOpen(false)
 			} catch (error) {
 				console.error(error);
 			}
@@ -447,6 +469,25 @@ const Detail = ({ location, history }) => {
 	return (
 		<DetailStyle>
 			{/* <SearchHeader /> */}
+			<Modal
+				isOpen={ModalOpen}
+				onRequestClose={() => {
+					setModalOpen(false)
+				}}
+				style={customStyles}
+			>
+				구매 완료시에만 눌러주세요
+				<div className="modalbtn">
+					<ButtonGray function1={done} id={post.id}>구매 완료</ButtonGray>
+				<ButtonGray
+					function1={() => {
+						setModalOpen(false);
+					}}
+				>
+					취소
+				</ButtonGray></div>
+				
+			</Modal>
 			<div className="body">
 				<div className="top">
 					<div className="left">
@@ -533,7 +574,7 @@ const Detail = ({ location, history }) => {
 					<div className="textarea">{post.body} </div>
 				)}
 				<div className="btnsection">
-					<ButtonWhite function1={() => done(post.id)}>
+					<ButtonWhite function1={() => setModalOpen(true)}>
 						구매완료
 					</ButtonWhite>
 					{post.author.url ===

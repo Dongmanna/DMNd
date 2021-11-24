@@ -6,8 +6,10 @@ import Input from '../Componenets/Input';
 import axios from 'axios';
 import styled from 'styled-components';
 import url from '../Url';
+import Modal from 'react-modal'
 
 const SignUpStyle = styled.div`
+	
 	.red {
 		font-size: 1.2rem;
 		color: red;
@@ -28,7 +30,7 @@ const SignUpStyle = styled.div`
 	.box {
 		width: 50rem;
 	}
-	form {
+	.form {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -93,8 +95,28 @@ const SignUpStyle = styled.div`
 	button {
 		margin-top: 5rem;
 		margin-bottom: 5rem;
+		margin-left :25rem;
 	}
 `;
+const customStyles = {
+	content: {
+	  top: '50%',
+	  left: '50%',
+	  right: 'auto',
+	  bottom: 'auto',
+	  marginRight: '-50%',
+	  transform: 'translate(-50%, -50%)',
+	  width: '40rem',
+	  fontSize: "2rem",
+	  display: "flex",
+	  justifyContent:"space-evenly",
+	  alignItems:"center",
+	  flexDirection:"column",
+	  height:"40rem",
+	  fontFamily: 'NIXGONM-Vb',
+
+	},
+  };
 
 export default function SignUp({ setIsLogged }) {
 	let history = useHistory();
@@ -107,6 +129,7 @@ export default function SignUp({ setIsLogged }) {
 	const [Address, setAddress] = useState('');
 	const [Error, setError] = useState([]);
 	const [geoInfo, setgeoInfo] = useState('');
+	const [ModalOpen, setModalOpen] = useState(false)
 
 	async function getUserNow() {
 		try {
@@ -138,7 +161,6 @@ export default function SignUp({ setIsLogged }) {
 					localStorage.setItem('user_token', res.data.key);
 				});
 			await getUserNow();
-			setIsLogged(true);
 		} catch (error) {
 			// if (error.response) {
 			// 	/*
@@ -170,7 +192,7 @@ export default function SignUp({ setIsLogged }) {
 				// profile_image:null,
 			});
 			await login();
-			history.push('/');
+			setModalOpen(true)
 		} catch (error) {
 			if (error.response) {
 				/*
@@ -260,10 +282,17 @@ export default function SignUp({ setIsLogged }) {
 	}, []);
 	return (
 		<SignUpStyle>
+			<Modal isOpen={ModalOpen} onRequestClose={() =>{if(localStorage.userNow)setIsLogged(true);
+ history.push("/")}}         style={customStyles}
+ >
+				회원가입이 완료되었습니다. 환영해요!
+				<ButtonGreen function1={()=>{history.push("/");if(localStorage.userNow)setIsLogged(true)}
+}>확인</ButtonGreen>
+			</Modal>
 			<div className="box">
 				<h1>회원가입</h1>
 				<div className="line"></div>
-				<div>
+				<div className = "form">
 					<div className="input-box email">
 						<label htmlFor="">이메일</label>
 						<h2>이메일을 입력해주세요.</h2>
