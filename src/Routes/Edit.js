@@ -181,7 +181,7 @@ const Edit = ({ location }) => {
 	const [Item, setItem] = useState(post.item);
 	const [Limit, setLimit] = useState(post.limit);
 	const [LinkA, setLinkA] = useState(post.link);
-	const [ChatRoom, setChatRoom] = useState('');
+	const [ChatRoom, setChatRoom] = useState(post.chatroom);
 
 	const [Price, setPrice] = useState(post.price);
 	const [Deadline, setDeadline] = useState(null);
@@ -346,6 +346,7 @@ const Edit = ({ location }) => {
 							className={Error.title ? 'title red' : 'title'}
 							placeholder="제목을 입력해주세요"
 							onChange={handleTitle}
+							value={Title}
 						/>
 						<div className="container">
 							<div className="left-con con">
@@ -354,7 +355,7 @@ const Edit = ({ location }) => {
 									placeholder="지역"
 									name="region"
 									red={Error.region}
-									value={userNow.region}
+									value={post.region}
 								></Input>
 								<Input
 									required
@@ -362,6 +363,7 @@ const Edit = ({ location }) => {
 									name="item"
 									setState={setItem}
 									red={Error.item}
+									value={Item}
 								></Input>
 								<Input
 									required
@@ -369,6 +371,7 @@ const Edit = ({ location }) => {
 									name="limit"
 									setState={setLimit}
 									red={Error.limit}
+									value={Limit}
 								></Input>
 							</div>
 							<div className="right-con con">
@@ -378,6 +381,7 @@ const Edit = ({ location }) => {
 									name="price"
 									setState={setPrice}
 									red={Error.price}
+									value={Price}
 								></Input>
 								<Input
 									size="L"
@@ -386,16 +390,17 @@ const Edit = ({ location }) => {
 									setState={setDeadline}
 									typeOn={'date'}
 									red={Error.deadline}
+									value={Deadline}
 								></Input>
 								<Input
-									size="LL"
-									placeholder="오픈카톡방 링크"
-									name="chatroom"
-									type={'url'}
-									setState={setChatRoom}
-									red={Error.chatroom}
-									required
-								></Input>{' '}
+										size="L"
+										placeholder="관련 링크"
+										name="link"
+										setState={setLinkA}
+										red={Error.link}
+										value={LinkA}
+									></Input>{' '}
+
 							</div>
 						</div>
 						<Input
@@ -406,13 +411,14 @@ const Edit = ({ location }) => {
 							setState={setChatRoom}
 							red={Error.chatroom}
 							required
+							value={ChatRoom}
 						></Input>
 					</div>
 
 					<div className="imgbox">
 						{Image ? (
 							<img src={ImagePreview} alt="" />
-						) : (
+						) :ImagePreview?<img src={ImagePreview} alt="" />: (
 							<div className="default-img">
 								사진을 추가하지 않으면 설정하신 품목에 맞는 랜덤
 								이미지가 배정됩니다.
@@ -433,6 +439,7 @@ const Edit = ({ location }) => {
 				</div>
 
 				<textarea
+				value={Body}
 					name="body"
 					id=""
 					cols="30"

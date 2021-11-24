@@ -7,7 +7,6 @@ const InputStyle = styled.input`
         height: 3rem;
         border:none;
         border-bottom:solid 2px var(--grn-1);
-        ${(props)=>props.red?`border-bottom:solid 2px red`:""};
         background-color: transparent;
         font-size: 1.6rem;
         ::placeholder{
@@ -27,12 +26,14 @@ const InputStyle = styled.input`
     ${(props)=> props.size==="L" &&`
         width:20vw;
         border-bottom:solid 2px #CFEBAC;
+        
         :focus{
             outline-width:0;
             border-bottom:solid 3px var(--grn-1);
             transition: .4s;
 
         }
+
     `}
     ${(props)=> props.size==="LL" &&`
         width:30vw;
@@ -41,7 +42,6 @@ const InputStyle = styled.input`
 
         border:solid 2px var(--grn-1);
         border-radius:5px;
-        ${(props)=>props.red?`border-bottom:solid 2px red`:""};
 
         overflow:hidden;
         text-overflow:elipsis;
@@ -51,7 +51,12 @@ const InputStyle = styled.input`
             transition: .4s;
 
         }
+
     `}
+            ${(props)=>props.red?`border-bottom:solid 2px red`:""};
+            ${(props)=>props.red && props.size==="LL"?`border:solid 2px red`:""};
+
+
 `
 export default function Input({size, placeholder, required, type, setState, name, red, typeOn, value}) {
     placeholder= (required)?"*"+placeholder:placeholder;

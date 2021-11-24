@@ -85,12 +85,12 @@ const Header = ({s, setIsLogged}) => {
 					<SLink to="/"><img src={logo} alt="" /></SLink>
 				</div>
 				<div className="Header_R">
-					<SLink to="/Write" className="gotowrite">
+					<SLink to="/write" className="gotowrite">
 						{' '}
 						게시글 작성{' '}
 					</SLink>
 					<div className="border"></div>
-					<SLink to="/Mypage" className="gotomy">
+					<SLink to="/mypage" className="gotomy">
 						{' '}
 						마이페이지{' '}
 					</SLink>
@@ -104,7 +104,7 @@ const Header = ({s, setIsLogged}) => {
 			</HeaderStyle>
 			{s ? (
 				<div className="sbar">
-					<SLink to="/Result">
+					<SLink to="/result">
 						<SearchBar size="S" />
 					</SLink>
 				</div>

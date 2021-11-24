@@ -35,10 +35,10 @@ function Routers() {
 								<Route exact path="/chatting">
 									<Chatting />
 								</Route>
-								<Route path="/detail">
+								<Route  path="/detail">
 									<Detail />
 								</Route>
-								<Route exact path="/edit">
+								<Route  path="/edit">
 									<Edit />
 								</Route>
 								<Route exact path="/">
@@ -50,7 +50,7 @@ function Routers() {
 								<Route path="/result">
 									<Result />
 								</Route>
-								<Route exact path="/write">
+								<Route 	path="/write">
 									<Write />
 								</Route>
 							</>

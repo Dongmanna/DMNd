@@ -18,6 +18,9 @@ import url from "../Url"
 const LoginStyle = styled.div`
 	width: 100%;
 	display: flex;
+	@media(max-width:600px){
+		display: block;
+	}
 	.red{
 		font-size:1.4rem;
 		color:red;
@@ -30,7 +33,12 @@ const LoginStyle = styled.div`
 		height:3rem;
 	}
 	.left {
+		@media(max-width:600px){
+		width:100%;
+		height:70rem;
+	}
 		width: 54%;
+
 		min-width: 50rem;
 		height: 100vh;
 		background-color: var(--grn-1);
@@ -38,7 +46,14 @@ const LoginStyle = styled.div`
 		.contain {
 			position: absolute;
 			right: 0;
+			@media(max-width:600px){
+		right:calc(50% - 25rem);
+	}
 			.carousel {
+				@media(max-width:600px){
+		margin-top:10rem;
+		
+	}
 				margin-top: 20vh;
 				position: relative;
 				overflow: hidden;
@@ -75,18 +90,33 @@ const LoginStyle = styled.div`
 
 	.right {
 		width: 45%;
+		@media(max-width:600px){
+		width:100%;
+	}
+	@media(max-width:600px){
+		height:100%;
+	}
 		height: 100vh;
 		position: relative;
 		.login-box {
 			width: 70%;
+			
 			max-width: calc(100vw - 50rem);
 
 			border: solid 1px var(--grn-1);
 			height: 50rem;
 			margin-top: 20vh;
-			@media (max-width: 1040px) {
+			@media (max-width: 1100px) {
 				width: 46vw;
 			}
+			@media(max-width:600px){
+				width:70%;
+		height:40rem;
+		max-width:70%;
+		margin:10rem auto;
+		border-radius: 5px;
+		
+	}
 			input {
 				width: 65%;
 				height: 5rem;
@@ -137,10 +167,7 @@ const LoginStyle = styled.div`
 			display: flex;
 			justify-content: space-evenly;
 			width: 100%;
-			@media (max-width: 600px) {
-				display: inline;
-				padding-left: 5%;
-			}
+			
 		}
 	}
 `;
