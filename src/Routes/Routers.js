@@ -12,7 +12,6 @@ import SignUp from "./SignUp"
 import ScrollToTop from "../Componenets/ScrollToTop";
 import Header from "../Componenets/Header";
 import styled from "styled-components";
-import Footer from "../Componenets/Footer";
 const SwitchStyle =styled.div`
 	/* padding:0 8%; */
 `
@@ -57,7 +56,7 @@ function Routers() {
 							</>
 						</Switch>
 					</SwitchStyle>
-					<Footer/>
+					{/* <Footer/> */}
 				</>
 			) : (
 				<>

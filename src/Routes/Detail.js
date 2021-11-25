@@ -77,8 +77,8 @@ const DetailStyle = styled.div`
 				.date {
 					width: 100%;
 					color: gray;
-					margin-left: 1rem;
 					font-size: 1.4rem;
+					line-height: 2rem;
 				}
 			}
 			.author {
@@ -95,22 +95,19 @@ const DetailStyle = styled.div`
 		}
 		.datasection {
 			height: 58%;
-			.type {
-				width:7rem;
-        		display: inline-block;
-			}
+			
 			.must {
 				font-size: 1.8rem;
 				border-bottom: solid 0.1rem black;
-				line-height: 5rem;
-				padding-left: 3%;
-				margin-bottom: 1rem;
+				line-height:6rem;
+				padding-left: 2%;
+				margin-bottom: 2rem;
 				height: 50%;
 			}
 			.alpha {
 				font-size: 1.6rem;
 				line-height: 3rem;
-				padding-left: 3%;
+				padding-left: 2%;
 				overflow: hidden;
 				text-overflow: ellipsis;
 				.linkbox{
@@ -123,6 +120,11 @@ const DetailStyle = styled.div`
 					overflow: hidden;
 				text-overflow: ellipsis;
 				}
+			}
+			.type {
+				width:7rem;
+        		display: inline-block;
+				font-size:1rem
 			}
 		}
 		.btntop {
@@ -545,10 +547,10 @@ const Detail = ({ location, history }) => {
 						</div>
 						<div className="datasection">
 							<div className="must">
-								<div className="type">품목</div> {post.item}
+								
+								<div className="type">품목</div>{post.item}
 								<br />
-								<div className="type">모집인원</div>{' '}
-								{post.members.length}/{post.limit}
+								<div className="type">모집인원</div>{post.members.length}/{post.limit}
 							</div>
 							<div className="alpha">
 								<div className="type">가격</div>{' '}

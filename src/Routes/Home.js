@@ -5,6 +5,7 @@ import SearchBar from '../Componenets/SearchBar';
 import styled from "styled-components";
 import axios from 'axios';
 import url from "../Url"
+import Footer from "../Componenets/Footer";
 
 const HomeStyle = styled.main`
     .search-box{
@@ -97,7 +98,7 @@ const Home = () => {
                     
                 </div>
             </div>
-
+        <Footer></Footer>
         </HomeStyle>
 
     )
