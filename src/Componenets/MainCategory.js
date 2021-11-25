@@ -39,6 +39,9 @@ max-height:200vh;
     border-bottom: solid var(--grn-1) 0.3rem;
     margin-bottom:4rem;
 }
+a{
+    text-decoration:none
+}
 `
 const SelectorStyle = styled.p`
         font-family: 'Poppins';

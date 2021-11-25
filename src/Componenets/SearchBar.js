@@ -63,7 +63,7 @@ const SearchBarStyle = styled.form`
     height:4.3rem;
     margin-top:2vh;
     padding-right:5%;
-
+    pointer-events:none;
     .after{
             height:1.7rem;
             border-right:solid var(--grn-1) 2px;

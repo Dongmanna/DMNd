@@ -113,10 +113,13 @@ const DetailStyle = styled.div`
 				padding-left: 3%;
 				overflow: hidden;
 				text-overflow: ellipsis;
+				.linkbox{
+					display:flex;
+				}
 				.link{
 					display:inline-block;
 					width:20rem;
-					height:3rem;
+					height:3rem;	
 					overflow: hidden;
 				text-overflow: ellipsis;
 				}
@@ -127,6 +130,9 @@ const DetailStyle = styled.div`
 			display: flex;
 			justify-content: end;
 			align-items: flex-end;
+			h2{
+				margin-right: 2rem;
+			}
 		}
 	}
 
@@ -550,8 +556,11 @@ const Detail = ({ location, history }) => {
 								<br />
 								<div className="type">마감기한</div>{' '}
 								{post.deadline ? post.deadline : '미정'} <br />
+								<div className="linkbox">
 								<div className="type">링크</div>{' '}
-								<div className="link">{post.link ? post.link : '미정'}</div> 
+								<a href = {post.link}  target="_blank" rel="noopener noreferrer" className="link">{post.link ? post.link : '미정'}</a> 
+								</div>
+								
 								<br />
 							</div>
 						</div>
@@ -575,7 +584,7 @@ const Detail = ({ location, history }) => {
 							{post.author.url ===
 							JSON.parse(localStorage.userNow).url ? (
 								''
-							) : Part&&post.members.length < post.limit &&!IsDone?
+							) : Part &&!IsDone?
 								<ButtonGray
 									setPart={setPart}
 									function1={join}
