@@ -4,13 +4,12 @@ import styled from 'styled-components';
 import SearchBar from './SearchBar';
 import logo from "../img/logo.png"
 const HeaderStyle = styled.div`
+width: 100%;
 img{
-	width:20rem;
+	width:15vw;
 	margin-left:5vw;
 	margin-top:2rem;
 	object-fit: cover;
-
-
 }
 	width: 100%;
 	height: 10vh;

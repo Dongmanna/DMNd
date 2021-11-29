@@ -9,6 +9,9 @@ const CardStyle=styled.div`
     @media(max-width:1040px){
         width:32vw;
     }
+    @media(max-width: 400px){
+        width: 55vw;
+    }
     height:26rem;
     background-color:#fff;
     position:relative;
@@ -89,13 +92,13 @@ const CardStyle=styled.div`
         background-color: #fff;
         text-align: center;
         position:absolute;
-        right:1rem;
-        bottom:1rem;
+        right:0.8rem;
+        bottom:-1.2rem;
         height:5rem;
         width:5rem;
         line-height:1rem;
         font-weight:600;
-        opacity: 0.08;
+        opacity: 0.15;
     }
 .itembox{
     display:flex;
@@ -118,7 +121,7 @@ const CardStyle=styled.div`
     .item {
         width:3rem;
         font-family: NIXGONFONTS V2.0;
-        font-size: .8rem;
+        font-size: .9rem;
         line-height: 1.6rem;
         overflow:hidden;
         text-overflow:ellipsis;

@@ -22,17 +22,20 @@ max-height:200vh;
     justify-content: space-evenly;
     width:100%; */
     display: grid; 
-    
-    
-        grid-template-columns: repeat(3,minmax(33%, auto));
+    grid-template-columns: repeat(3,minmax(33%, auto));
 
     @media(max-width: 1040px){
         grid-template-columns: repeat(2,minmax(50%, auto));
     }
-
+    @media(max-width:400px){
+        grid-template-columns: repeat(1, minmax(100%, auto));
+        justify-items: center;
+    }
     column-gap: 0.3%;
     row-gap: 1.5%;
 }
+
+
 .categories{
     padding-left:1rem;
     display:flex;
@@ -45,7 +48,7 @@ a{
 `
 const SelectorStyle = styled.p`
         font-family: 'Poppins';
-        font-size:2.4rem;
+        font-size:3vw;
         font-weight:600;
         margin:0;
         margin-bottom: 2rem;

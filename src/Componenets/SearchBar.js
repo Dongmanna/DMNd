@@ -19,7 +19,7 @@ const SearchBarStyle = styled.form`
         width:90%;
         height:9rem;
         background-color: transparent;
-        font-size: 2.6rem;
+        font-size: 2.5vw;
         border:none;
       ::placeholder{
             color:var(--gray1);

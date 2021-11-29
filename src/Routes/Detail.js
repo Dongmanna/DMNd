@@ -17,6 +17,7 @@ import temp_image1 from "../img/temp_image1.png"
 
 
 const DetailStyle = styled.div`
+width:100%;
 	font-family: 'NIXGONM-Vb';
 	img{
 		object-fit: cover;
@@ -66,9 +67,11 @@ const DetailStyle = styled.div`
 					}
 				.title {
 					font-family: 'Roboto';
-
 					width: 100%;
 					font-size: 2rem;
+					@media(max-width:400px){
+						font-size:2vw;
+					}
 					overflow: hidden;
 					text-overflow: ellipsis;
 					height: 2.5rem;
@@ -95,7 +98,6 @@ const DetailStyle = styled.div`
 		}
 		.datasection {
 			height: 58%;
-			
 			.must {
 				font-size: 1.8rem;
 				border-bottom: solid 0.1rem black;
