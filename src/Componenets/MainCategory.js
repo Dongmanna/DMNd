@@ -9,9 +9,7 @@ const MainCategoryStyle = styled.div`
 
 width:70vw;
 margin:0 15vw;
-@media(max-width:400px){
-    margin:2vw;
-}
+
 max-height:200vh;
 .phrase{
     font-size:3rem;
@@ -30,7 +28,7 @@ max-height:200vh;
     @media(max-width: 1040px){
         grid-template-columns: repeat(2,minmax(50%, auto));
     }
-    @media(max-width:400px){
+    @media(max-width:500px){
         width:80vw;
         justify-items: stretch;
     }
@@ -44,7 +42,7 @@ max-height:200vh;
     display:flex;
     border-bottom: solid var(--grn-1) 0.3rem;
     margin-bottom:4rem;
-    @media(max-width:400px){
+    @media(max-width:500px){
     width:80vw;
 }
 }

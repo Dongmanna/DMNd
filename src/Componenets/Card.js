@@ -9,8 +9,8 @@ const CardStyle=styled.div`
     @media(max-width:1040px){
         width:32vw;
     }
-    @media(max-width: 400px){
-        width: 40vw;
+    @media(max-width: 500px){
+        width: 38.5vw;
     }
     height:26rem;
     background-color:#fff;
@@ -73,7 +73,7 @@ const CardStyle=styled.div`
         display:flex;
         flex-direction: column;
         justify-content: space-evenly;
-        @media(max-width:400px){
+        @media(max-width:500px){
             padding-left:0.2vw;
 }
     }
@@ -116,7 +116,7 @@ const CardStyle=styled.div`
         -webkit-line-clamp: 2; /* number of lines to show */
         /* -webkit-box-orient: vertical;*/
         margin-left: 1rem; 
-        @media(max-width: 400px){
+        @media(max-width: 500px){
             width:15vw;
             font-size: 0.3vw;
             margin-left:0;
@@ -132,7 +132,7 @@ const CardStyle=styled.div`
         text-overflow:ellipsis;
         /* display: block;
         max-height:4rem; */
-        @media(max-width: 400px){
+        @media(max-width: 500px){
             left:0;
         width: 9vw;
         font-size: 0.3vw;
