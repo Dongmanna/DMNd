@@ -9,6 +9,9 @@ const MainCategoryStyle = styled.div`
 
 width:70vw;
 margin:0 15vw;
+@media(max-width:400px){
+    margin:2vw;
+}
 max-height:200vh;
 .phrase{
     font-size:3rem;
@@ -22,22 +25,28 @@ max-height:200vh;
     justify-content: space-evenly;
     width:100%; */
     display: grid; 
-    
-    
-        grid-template-columns: repeat(3,minmax(33%, auto));
+    grid-template-columns: repeat(3,minmax(33%, auto));
 
     @media(max-width: 1040px){
         grid-template-columns: repeat(2,minmax(50%, auto));
     }
-
+    @media(max-width:400px){
+        width:80vw;
+        justify-items: stretch;
+    }
     column-gap: 0.3%;
     row-gap: 1.5%;
 }
+
+
 .categories{
     padding-left:1rem;
     display:flex;
     border-bottom: solid var(--grn-1) 0.3rem;
     margin-bottom:4rem;
+    @media(max-width:400px){
+    width:80vw;
+}
 }
 a{
     text-decoration:none
@@ -45,7 +54,7 @@ a{
 `
 const SelectorStyle = styled.p`
         font-family: 'Poppins';
-        font-size:2.4rem;
+        font-size:3vw;
         font-weight:600;
         margin:0;
         margin-bottom: 2rem;

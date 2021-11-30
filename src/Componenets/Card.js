@@ -9,6 +9,9 @@ const CardStyle=styled.div`
     @media(max-width:1040px){
         width:32vw;
     }
+    @media(max-width: 400px){
+        width: 40vw;
+    }
     height:26rem;
     background-color:#fff;
     position:relative;
@@ -42,7 +45,6 @@ const CardStyle=styled.div`
             transition: .35s;
             transform: scale(1.05);
             cursor: pointer;
-
         }
     }
     .title{
@@ -71,9 +73,9 @@ const CardStyle=styled.div`
         display:flex;
         flex-direction: column;
         justify-content: space-evenly;
-        p{
-        
-        }
+        @media(max-width:400px){
+            padding-left:0.2vw;
+}
     }
     img{
         margin:auto 0;
@@ -89,13 +91,13 @@ const CardStyle=styled.div`
         background-color: #fff;
         text-align: center;
         position:absolute;
-        right:1rem;
-        bottom:1rem;
+        right:0.8rem;
+        bottom:-1.2rem;
         height:5rem;
         width:5rem;
         line-height:1rem;
         font-weight:600;
-        opacity: 0.08;
+        opacity: 0.15;
     }
 .itembox{
     display:flex;
@@ -113,17 +115,28 @@ const CardStyle=styled.div`
         /* display: -webkit-box;
         -webkit-line-clamp: 2; /* number of lines to show */
         /* -webkit-box-orient: vertical;*/
-         margin-left: 1rem; 
+        margin-left: 1rem; 
+        @media(max-width: 400px){
+            width:15vw;
+            font-size: 0.3vw;
+            margin-left:0;
+            justify-items: center;
+    }
     }
     .item {
         width:3rem;
         font-family: NIXGONFONTS V2.0;
-        font-size: .8rem;
+        font-size: .9rem;
         line-height: 1.6rem;
         overflow:hidden;
         text-overflow:ellipsis;
         /* display: block;
         max-height:4rem; */
+        @media(max-width: 400px){
+            left:0;
+        width: 9vw;
+        font-size: 0.3vw;
+    }
         
     }
 }

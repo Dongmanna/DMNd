@@ -94,8 +94,7 @@ const Home = () => {
                 </div>
                 
                         <MainCategory phrase="이런 글은 어떠세요?" content={Content} />
-                <div className="card-cate">
-                    
+                <div className="card-cate">   
                 </div>
             </div>
         <Footer></Footer>
