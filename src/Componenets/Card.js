@@ -10,7 +10,7 @@ const CardStyle=styled.div`
         width:32vw;
     }
     @media(max-width: 400px){
-        width: 55vw;
+        width: 40vw;
     }
     height:26rem;
     background-color:#fff;
@@ -45,7 +45,6 @@ const CardStyle=styled.div`
             transition: .35s;
             transform: scale(1.05);
             cursor: pointer;
-
         }
     }
     .title{
@@ -74,9 +73,9 @@ const CardStyle=styled.div`
         display:flex;
         flex-direction: column;
         justify-content: space-evenly;
-        p{
-        
-        }
+        @media(max-width:400px){
+            padding-left:0.2vw;
+}
     }
     img{
         margin:auto 0;
@@ -116,7 +115,13 @@ const CardStyle=styled.div`
         /* display: -webkit-box;
         -webkit-line-clamp: 2; /* number of lines to show */
         /* -webkit-box-orient: vertical;*/
-         margin-left: 1rem; 
+        margin-left: 1rem; 
+        @media(max-width: 400px){
+            width:15vw;
+            font-size: 0.3vw;
+            margin-left:0;
+            justify-items: center;
+    }
     }
     .item {
         width:3rem;
@@ -127,6 +132,11 @@ const CardStyle=styled.div`
         text-overflow:ellipsis;
         /* display: block;
         max-height:4rem; */
+        @media(max-width: 400px){
+            left:0;
+        width: 9vw;
+        font-size: 0.3vw;
+    }
         
     }
 }

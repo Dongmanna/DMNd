@@ -9,6 +9,9 @@ const MainCategoryStyle = styled.div`
 
 width:70vw;
 margin:0 15vw;
+@media(max-width:400px){
+    margin:2vw;
+}
 max-height:200vh;
 .phrase{
     font-size:3rem;
@@ -28,8 +31,8 @@ max-height:200vh;
         grid-template-columns: repeat(2,minmax(50%, auto));
     }
     @media(max-width:400px){
-        grid-template-columns: repeat(1, minmax(100%, auto));
-        justify-items: center;
+        width:80vw;
+        justify-items: stretch;
     }
     column-gap: 0.3%;
     row-gap: 1.5%;
@@ -41,6 +44,9 @@ max-height:200vh;
     display:flex;
     border-bottom: solid var(--grn-1) 0.3rem;
     margin-bottom:4rem;
+    @media(max-width:400px){
+    width:80vw;
+}
 }
 a{
     text-decoration:none
