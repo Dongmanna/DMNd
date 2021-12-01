@@ -5,6 +5,7 @@ const ButtonWhiteStyle=styled.button`
     /* max-width:13vw; */
     min-width:5rem;
     margin: 0 1rem;
+    margin-bottom:2rem;
     height: 3rem;  
     background: #FFFFFF;
     border: 2px solid var(--grn-1); 

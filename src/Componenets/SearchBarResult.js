@@ -17,7 +17,7 @@ form{
         background-color: transparent;
         font-size: 2rem;
         padding-left:4rem;
-      ::placeholder{
+        ::placeholder{
             color:var(--gray1);
         }
         :hover{
@@ -34,21 +34,26 @@ form{
         
     }
     img{
+        margin-bottom:0.5rem;
         width:3rem;
     }
     button{
         font-weight: bold;
         font-size: 1.6rem;
-        width:15%;
+        width:13%;
         max-width:15rem;
-        height:55px;
+        height:4.5vw;
         background-color: #fff;
         border:solid 0.2rem;
         box-shadow: 0.8px -0.8px 4px 0 var(--gray1) ;
         margin-left:4rem;
-        text-align: right;
-        padding-right:3rem;
+        text-align: center;
+        padding-right:0.8rem;
         min-width:6rem;
+        @media(max-width: 800px){
+        width: 15%;
+        height: 5vw;
+    }
 
         :active{
         box-shadow: -1px 1px 4px 0 var(--gray1) ;
@@ -72,8 +77,8 @@ export default function SearchBarResult({searchText, setSearchText}) {
     }
     return (
         <SearchBarResultStyle>
-            <form >
             <img src={searchIconBlack}alt="검색" />
+            <form >
             <input type="text" placeholder="검색어를 입력해주세요" value={inputText} onChange={handleSearch}/>
             <button type="submit" onClick={onclick}>검색</button>
             </form>

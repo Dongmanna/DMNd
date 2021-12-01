@@ -6,10 +6,23 @@ import logo from "../img/logo.png"
 const HeaderStyle = styled.div`
 width: 100%;
 img{
-	width:15vw;
+	width:20rem;
 	margin-left:5vw;
-	margin-top:2rem;
+	margin-top:1.5rem;
 	object-fit: cover;
+	@media(max-width:600px){
+		margin-top:1.5vw;
+		width: 22vw;
+}
+@media(max-width:390px){
+	width:21vw;
+	margin-top:3vw;
+    margin-left:2.5vw;
+}
+@media(max-width:300px){
+    margin-top:4vw;
+	width:18vw;
+}
 }
 	width: 100%;
 	height: 10vh;
@@ -27,6 +40,9 @@ img{
 		color: #a2a2a2;
 		display: flex;
 		justify-content: flex-end;
+		@media(max-width:400px){
+			font-size: 1rem;
+		}
 	}
 
 	.gotowrite {
@@ -67,6 +83,12 @@ const Hstyle = styled.div`
 		position: absolute;
 		right: calc(4vw + 30rem);
 		top: 1rem;
+		@media(max-width:350px){
+			left:25vw;
+		}
+		@media(max-width:300px){
+			left:22vw;
+		}
 	}
 `;
 

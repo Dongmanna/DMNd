@@ -185,7 +185,6 @@ width:100%;
 		align-items: center;
 		.comment-sub {
 			width: 70vw;
-
 			textarea {
 				width: 70%;
 				height: 10vh;
@@ -203,19 +202,20 @@ width:100%;
 					color: transparent !important;
 				}
 				margin-bottom: 2rem;
-				/* ::-webkit-scrollbar {
-					opacity: 0;
+				::-webkit-scrollbar {
+					width:0.8vw;
 				}
 				::-webkit-scrollbar-thumb {
-					opacity: 0.3;
-					border-right: solid 4px var(--grn-2);
-					border-radius: 3px;
-					width: 2px;
+					background-color: var(--grn-2); 
+					border-radius: 10px;
+					background-clip: padding-box;
+					border: 0.5px solid transparent;
 				}
-				::-webkit-scrollbar-corner {
-					opacity: 0;
+				::-webkit-scrollbar-track {
 					background-color: transparent;
-				} */
+					border-radius:10px;
+					box-shadow: inset 0px 0px 5px white;
+				}
 			}
 		}
 	}

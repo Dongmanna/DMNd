@@ -13,7 +13,7 @@ const ResultStyle=styled.div`
 
 .search-box{
     width:80vw;
-    margin:0 10vw;
+    margin:0 15vw;
     margin-top:15rem;
     margin-bottom: 10rem;
 }
